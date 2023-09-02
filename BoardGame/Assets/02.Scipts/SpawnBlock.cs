@@ -12,7 +12,7 @@ public enum Direction
 
 public class SpawnBlock : GameComponent
 {
-    private PoolObjectType poolType = PoolObjectType.ground01;
+    private PoolObjectType poolType = PoolObjectType.block01;
 
     private float routineNum = 40;
 
@@ -25,6 +25,8 @@ public class SpawnBlock : GameComponent
 
     protected override void OnRunning()
     {
+        CreateGround();
+
         for (int i = 0; i < routineNum / 4; i++)
         {
             CreateBlock(5, Direction.zPos);
@@ -43,6 +45,13 @@ public class SpawnBlock : GameComponent
         }
 
         base.Initialize();
+    }
+
+    private GameObject CreateGround()
+    {
+        var newObj = ObjectPool.instance.GetObject(PoolObjectType.ground);
+        newObj .transform.position = new Vector3(25, -2, 25);
+        return newObj;
     }
 
     private void CreateBlock(int sign, Direction dir)
@@ -64,9 +73,9 @@ public class SpawnBlock : GameComponent
     private PoolObjectType BlockType(PoolObjectType type)
     {
         if(type == 0)
-            type = PoolObjectType.ground02;
+            type = PoolObjectType.block02;
         else
-            type = PoolObjectType.ground01;
+            type = PoolObjectType.block01;
 
         return poolType = type;
     }

@@ -241,6 +241,37 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &339682637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339682638}
+  m_Layer: 0
+  m_Name: SpawnObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339682638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339682637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80, y: 36.0493, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,13 +673,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 9ba4cfde394b7f343ba21dcd5fb13d70, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1479671696}
+        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
+        m_MethodName: StartBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -837,6 +868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479671694}
   - component: {fileID: 1479671695}
+  - component: {fileID: 1479671696}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -871,6 +903,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a5f5c1ce6fc964fa337690befe91e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1479671696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479671693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba4cfde394b7f343ba21dcd5fb13d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1883151443
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +925,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1883151445}
   - component: {fileID: 1883151446}
-  - component: {fileID: 1883151447}
   m_Layer: 0
   m_Name: ObejctPool
   m_TagString: Untagged
@@ -925,15 +968,8 @@ MonoBehaviour:
       type: 3}
     poolType: 1
     poolCount: 20
---- !u!114 &1883151447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883151443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4e21e80ca6c144d9607a396d4d8116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  - prefabs: {fileID: 6643111560040935604, guid: ddd75c03798ded44fa38dd76baec2296,
+      type: 3}
+    poolType: 2
+    poolCount: 1
+  spawnPos: {fileID: 339682638}

@@ -8,6 +8,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool instance;
 
     [SerializeField] private ObjectPoolData[] poolData;
+    [SerializeField] private Transform spawnPos;
 
     private readonly Dictionary<PoolObjectType, ObjectPoolData> _objectPoolData = new();
     private readonly Dictionary<PoolObjectType, Queue<GameObject>> _pool = new();
@@ -54,14 +55,14 @@ public class ObjectPool : MonoBehaviour
         {
             var obj = _pool[type].Dequeue();
             obj.gameObject.SetActive(true);
-            obj.transform.SetParent(null);
+            obj.transform.SetParent(spawnPos);
             return obj;
         }
         else
         {
             var obj = CreateNewObject(type);
             obj.gameObject.SetActive(true);
-            obj.transform.SetParent(null);
+            obj.transform.SetParent(spawnPos);
             return obj;
         }
     }
