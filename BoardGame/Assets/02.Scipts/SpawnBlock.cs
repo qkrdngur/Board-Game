@@ -2,65 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BoardGame.Util;
+using System;
 
-public class SpawnBlock : MonoBehaviour
+public enum Direction
 {
-    [SerializeField] private GameObject[] block;
-    private PoolObjectType poolType;
-    private bool isGround = true;
-    private Vector3 pos;
-    private void Awake()
-    {
-        poolType = PoolObjectType.ground01;
-        InstBlock();
-    }
+    zPos,
+    xPos
+}
 
-    void Start()
-    {
-            pos = block[0].transform.position;
-    }
+public class SpawnBlock : GameComponent
+{
+    private PoolObjectType poolType = PoolObjectType.ground01;
 
-    // Update is called once per frame
-    void Update()
+    private float routineNum = 40;
+
+    private Vector3 savePos = Vector3.zero;
+
+    public SpawnBlock(GameManager game) : base(game)
     {
 
     }
 
-    private void InstBlock()
+    protected override void OnRunning()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < routineNum / 4; i++)
         {
-            Instantiate(block[BlockType(isGround)], pos, Quaternion.identity);
-            isGround = !isGround;
-            pos.z += 2.5f;
+            CreateBlock(5, Direction.zPos);
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < routineNum / 4; i++)
         {
-            Instantiate(block[BlockType(isGround)], pos, Quaternion.identity);
-            isGround = !isGround;
-            pos.x += 2.5f;
+            CreateBlock(5, Direction.xPos);
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < routineNum / 4; i++)
         {
-            Instantiate(block[BlockType(isGround)], pos, Quaternion.identity);
-            isGround = !isGround;
-            pos.z -= 2.5f;
+            CreateBlock(-5, Direction.zPos);
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < routineNum / 4; i++)
         {
-            Instantiate(block[BlockType(isGround)], pos, Quaternion.identity);
-            isGround = !isGround;
-            pos.x -= 2.5f;
+            CreateBlock(-5, Direction.xPos);
         }
+
+        base.Initialize();
     }
 
-    private int BlockType(bool isG)
+    private void CreateBlock(int sign, Direction dir)
     {
-        if (isG)
-            poolType = PoolObjectType.ground02;
+        var newObj = ObjectPool.instance.GetObject(BlockType(poolType));
+
+        if (dir == Direction.zPos)
+        {
+            savePos += new Vector3(0, 0, sign);
+            newObj.transform.position = savePos;
+        }
         else
-            poolType = PoolObjectType.ground01;
+        {
+            savePos += new Vector3(sign, 0, 0);
+            newObj.transform.position = savePos;
+        }
+    }
 
-        return (int)poolType;
+    private PoolObjectType BlockType(PoolObjectType type)
+    {
+        if(type == 0)
+            type = PoolObjectType.ground02;
+        else
+            type = PoolObjectType.ground01;
+
+        return poolType = type;
     }
 }
