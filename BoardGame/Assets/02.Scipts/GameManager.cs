@@ -6,7 +6,7 @@ using BoardGame.Util;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    
     GameState State;
     private readonly List<IGameComponent> _components = new();
 
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         _components.Add(new SpawnBlock(this));
+        _components.Add(new PlayerMovement(this));
     }
 
     void Start()
