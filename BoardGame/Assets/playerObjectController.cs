@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using Steamworks;
 
 public class playerObjectController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //Player Data
+    [SyncVar] public int ConnectionID;
+    [SyncVar] public int PlayerIDNumber;
+    [SyncVar] public ulong PlayerSteamID;
+    [SyncVar(hook = nameof(PlayerNameUpdate))] public string PlayerName;
+
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager
     {
-        
+        get
+        {
+            if (manager != null)
+                return manager;
+
+            return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerNameUpdate(string OldValue, string NewValue)
     {
-        
+
     }
 }
