@@ -37,5 +37,49 @@ public class LobbyController : MonoBehaviour
         }
     }
 
-    
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    public void UpdateLobbyName()
+    {
+        CurrentLobbyID = Manager.GetComponent<SteamLobby>().CurrentLobbyID;
+        LobbyNameText.text = SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "name");
+    }
+
+    public void UpdatePlayerList()
+    {
+        if (!PlayerItemCreated) { CreateHostPlayerItem(); } //Host
+        if (PlayerListItems.Count < Manager.GamePlayers.Count) { CreateClientPlayerItem(); }
+        if (PlayerListItems.Count > Manager.GamePlayers.Count) { RemovePlayerItem(); }
+        if(PlayerListItems.Count == Manager.GamePlayers.Count) { UpdatePlayerItem(); }
+    }
+
+    public void FindLocalPlayer()
+    {
+        LocalPlayerObject = GameObject.Find("LocalGamePlayer");
+        LocalplayerController = LocalPlayerObject.GetComponent<playerObjectController>();
+    }
+
+    public void CreateHostPlayerItem()
+    {
+
+    } 
+    public void CreateClientPlayerItem()
+    {
+
+    }
+    public void UpdatePlayerItem()
+    {
+
+    }
+
+    public void RemovePlayerItem()
+    {
+
+    }
 }
