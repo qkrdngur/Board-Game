@@ -8,7 +8,7 @@ using System;
 public class PlayerListItem : MonoBehaviour
 {
     public string PlayerName;
-    public int CunnectionID;
+    public int ConnectionID;
     public ulong PlayerSteamID;
     private bool AvatarReceived;
 
