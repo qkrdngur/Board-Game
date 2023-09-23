@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4279936116124155738}
-  - component: {fileID: 6612206351114952276}
+  - component: {fileID: 3471359861858119390}
   m_Layer: 5
   m_Name: PlayerListItem
   m_TagString: Untagged
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6612206351114952276
+--- !u!114 &3471359861858119390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,9 +49,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4279936116124155739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ff343e6394ef84aaf02293e8d8e839, type: 3}
+  m_Script: {fileID: 11500000, guid: ec5f2b79a565f3246ba12cb18ee8a521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: hiwer
+  ConnectionID: 0
+  PlayerSteamID: 0
+  PlayerNameText: {fileID: 4279936117332919321}
+  PlayerIcon: {fileID: 4279936117014077794}
 --- !u!1 &4279936116296814281
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,14 +158,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4279936117014077804}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4279936116124155738}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 152, y: 0}
@@ -194,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 0c6a2a64ca9f9c946a7dbbd1674cf5bd, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

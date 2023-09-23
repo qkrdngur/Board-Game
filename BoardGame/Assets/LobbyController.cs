@@ -5,13 +5,14 @@ using Mirror;
 using Steamworks;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class LobbyController : MonoBehaviour
 {
     public static LobbyController Instance;
 
     //UI Elements
-    public Text LobbyNameText;
+    public TextMeshProUGUI LobbyNameText;
 
     //player Data
     public GameObject PlayerListViewContent;
