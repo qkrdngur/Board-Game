@@ -4,6 +4,12 @@ namespace BoardGame.Util
     {
         block01,
         block02,
-        ground
+        ground,
+        Player,
+        FirAi,
+        SecAi,
+        ThiAi,
+        RedDice,
+        WhiteDice
     }
 }

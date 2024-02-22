@@ -68,6 +68,8 @@ public class SpawnBlock : GameComponent
             savePos += new Vector3(sign, 0, 0);
             newObj.transform.position = savePos;
         }
+
+        GameManager.Instance.blockPos.Add(newObj.transform);
     }
 
     private PoolObjectType BlockType(PoolObjectType type)

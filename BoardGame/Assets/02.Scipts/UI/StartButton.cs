@@ -7,6 +7,6 @@ public class StartButton : MonoBehaviour
 {
     public void StartBtn()
     {
-        GameManager.instance.UpdateState(GameState.Main);
+        GameManager.Instance.UpdateState(GameState.Main);
     }
 }

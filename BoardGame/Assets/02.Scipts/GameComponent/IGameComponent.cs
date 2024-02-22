@@ -5,5 +5,7 @@ namespace BoardGame.Util
         void UpdateState(GameState state);
 
         void OnDisable();
+
+        void OnRoutine();
     }
 }

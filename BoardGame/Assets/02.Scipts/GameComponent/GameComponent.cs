@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace BoardGame.Util
 {
     public abstract class GameComponent : IGameComponent
@@ -19,6 +21,9 @@ namespace BoardGame.Util
                 case GameState.Standby:
                     OnStandby();
                     break;
+                case GameState.Setting:
+                    OnSetting();
+                    break;
                 case GameState.Main:
                     OnRunning();
                     break;
@@ -28,29 +33,23 @@ namespace BoardGame.Util
             }
         }
 
-        protected virtual void Initialize()
+        protected virtual void Initialize() { }
+
+        protected virtual void OnStandby() { }
+
+        protected virtual void OnSetting() { }
+
+        protected virtual void OnRunning() { }
+
+        protected virtual void OnUpdate() { }
+
+        protected virtual void OnOver() { }
+
+        public void OnDisable() { }
+
+        public void OnRoutine()
         {
-
-        }
-
-        protected virtual void OnStandby()
-        {
-
-        }
-
-        protected virtual void OnRunning()
-        {
-
-        }
-
-        protected virtual void OnOver()
-        {
-
-        }
-
-        public void OnDisable()
-        {
-
+            OnUpdate();
         }
     }
 }

@@ -4,6 +4,8 @@ namespace BoardGame.Util
     {
         Init,
         Standby,
+        Setting,
+        Dice,
         Main,
         Over
     }
