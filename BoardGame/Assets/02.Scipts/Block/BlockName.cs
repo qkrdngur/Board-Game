@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "name" ,menuName = "SO/name")]
 public class BlockName : ScriptableObject
 {
-    public List<string> name;
-
+    public List<string> RegionName;
+    public List<int> BuildPrice;
 }

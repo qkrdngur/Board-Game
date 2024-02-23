@@ -33,19 +33,19 @@ public class SpawnBlock : GameComponent
 
         for (int i = 0; i < routineNum / 4; i++)
         {
-            CreateBlock(5, Direction.zPos);
+            CreateBlock(5, 90, Direction.zPos);
         }
         for (int i = 0; i < routineNum / 4; i++)
         {
-            CreateBlock(5, Direction.xPos);
+            CreateBlock(5, 180, Direction.xPos);
         }
         for (int i = 0; i < routineNum / 4; i++)
         {
-            CreateBlock(-5, Direction.zPos);
+            CreateBlock(-5, 270, Direction.zPos);
         }
         for (int i = 0; i < routineNum / 4; i++)
         {
-            CreateBlock(-5, Direction.xPos);
+            CreateBlock(-5, 360, Direction.xPos);
         }
 
         isDone = true;
@@ -56,13 +56,23 @@ public class SpawnBlock : GameComponent
     private GameObject CreateGround()
     {
         var newObj = ObjectPool.instance.GetObject(PoolObjectType.ground);
-        newObj .transform.position = new Vector3(25, -2, 25);
+        newObj.transform.position = new Vector3(25, -2, 25);
         return newObj;
     }
 
-    private void CreateBlock(int sign, Direction dir)
+    private void CreateBlock(int sign, int rotate, Direction dir)
     {
         var newObj = ObjectPool.instance.GetObject(BlockType(poolType));
+
+        if ((GameManager.Instance.blockPos.Count + 1) % 10 == 0)
+        {
+            Transform child = newObj.transform.GetChild(0);
+
+            child.Rotate(new Vector3(0, 0, -45));
+            child.position = new Vector3(-0.6f, 2, -0.6f);
+        }
+
+        newObj.transform.Rotate(new Vector3(0, rotate, 0));
 
         if (dir == Direction.zPos)
         {
@@ -80,7 +90,7 @@ public class SpawnBlock : GameComponent
 
     private PoolObjectType BlockType(PoolObjectType type)
     {
-        if(type == 0)
+        if (type == 0)
             type = PoolObjectType.block02;
         else
             type = PoolObjectType.block01;

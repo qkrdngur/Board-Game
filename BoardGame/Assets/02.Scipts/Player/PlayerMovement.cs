@@ -28,7 +28,7 @@ public class PlayerMovement : GameComponent
 
         player.transform.position += new Vector3(0, 5, 0);
 
-        GameManager.Instance.player.Add("player", player);
+        GameManager.Instance.player.Add(PlayTurn.player, player);
     }
 
     protected override void OnMove()
@@ -39,13 +39,13 @@ public class PlayerMovement : GameComponent
 
     private void Jump()
     {
-        Transform pTrm = GameManager.Instance.player["player"].transform;
-        Debug.Log(GameManager.Instance.jumpCount);
+        Transform pTrm = GameManager.Instance.player[PlayTurn.player].transform;
+
         Sequence seq = DOTween.Sequence();
         for (int i = 0; i < GameManager.Instance.jumpCount; i++)
             seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[jumpNum++ % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
                     .SetEase(Ease.OutQuad));
 
-        seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Main));
+        seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
     }
 }

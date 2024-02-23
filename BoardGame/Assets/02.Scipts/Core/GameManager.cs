@@ -5,21 +5,27 @@ using BoardGame.Util;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public PlayTurn pTurn;
     public GameState State;
+    public BlockName blockSO;
 
     [HideInInspector] public List<Transform> blockPos;
-    public Dictionary<string, GameObject> player = new Dictionary<string, GameObject>();
+    [HideInInspector] public List<PlayTurn> blockRot;
+
+    public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
+
+    private readonly List<IGameComponent> _components = new();
 
     public readonly int GRADE = 12;
     public int jumpCount;
-
-    private readonly List<IGameComponent> _components = new();
 
     private void Awake()
     {
         _components.Add(new SpawnBlock(this));
         _components.Add(new PlayerMovement(this));
         _components.Add(new Dice(this));
+        _components.Add(new Build(this));
     }
 
     void Start()
@@ -33,9 +39,13 @@ public class GameManager : MonoSingleton<GameManager>
 
         foreach (var component in _components)
             component.UpdateState(state);
+    }
 
-        if (state == GameState.Init)
-            UpdateState(GameState.Standby);
+    public void NextTurn(PlayTurn turn)
+    {
+        int next = (int)++turn % 4;
+
+        pTurn = (PlayTurn)next;
     }
 
     void Update()
@@ -43,6 +53,5 @@ public class GameManager : MonoSingleton<GameManager>
         if (State == GameState.Main)
             foreach (var component in _components)
                 component.OnRoutine();
-
     }
 }

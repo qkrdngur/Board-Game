@@ -1304,7 +1304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
+  blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
   blockPos: []
+  jumpCount: 0
 --- !u!114 &1479671696
 MonoBehaviour:
   m_ObjectHideFlags: 0

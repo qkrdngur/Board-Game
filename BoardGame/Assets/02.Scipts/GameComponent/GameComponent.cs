@@ -18,9 +18,6 @@ namespace BoardGame.Util
                 case GameState.Init:
                     Initialize();
                     break;
-                case GameState.Standby:
-                    OnStandby();
-                    break;
                 case GameState.Setting:
                     OnSetting();
                     break;
@@ -30,6 +27,9 @@ namespace BoardGame.Util
                 case GameState.Move:
                     OnMove();
                     break;
+                case GameState.Build:
+                    OnBuild();
+                    break;
                 case GameState.Over:
                     OnOver();
                     break;
@@ -38,8 +38,6 @@ namespace BoardGame.Util
 
         protected virtual void Initialize() { }
 
-        protected virtual void OnStandby() { }
-
         protected virtual void OnSetting() { }
 
         protected virtual void OnRunning() { }
@@ -47,6 +45,8 @@ namespace BoardGame.Util
         protected virtual void OnUpdate() { }
 
         protected virtual void OnMove() { }
+
+        protected virtual void OnBuild() { }
 
         protected virtual void OnOver() { }
 
