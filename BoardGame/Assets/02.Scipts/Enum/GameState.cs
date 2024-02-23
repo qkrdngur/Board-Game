@@ -6,6 +6,7 @@ namespace BoardGame.Util
         Standby,
         Setting,
         Dice,
+        Move,
         Main,
         Over
     }

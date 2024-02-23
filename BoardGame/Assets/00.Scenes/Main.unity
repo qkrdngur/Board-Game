@@ -186,7 +186,7 @@ MonoBehaviour:
   center: {fileID: 354477334}
   parent: {fileID: 143397870}
   gagueTrm: {fileID: 1640747911}
-  speed: 30
+  speed: 50
   visual: {fileID: 5751538521178432395}
   graduation: {fileID: 7961124445830632542, guid: fef79214c8185694bb9b8872e76fb1d6,
     type: 3}

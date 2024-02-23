@@ -16,6 +16,8 @@ public class SpawnBlock : GameComponent
 
     private float routineNum = 40;
 
+    private bool isDone = false;
+
     private Vector3 savePos = Vector3.zero;
 
     public SpawnBlock(GameManager game) : base(game)
@@ -25,6 +27,8 @@ public class SpawnBlock : GameComponent
 
     protected override void OnRunning()
     {
+        if (isDone) return;
+
         CreateGround();
 
         for (int i = 0; i < routineNum / 4; i++)
@@ -43,6 +47,8 @@ public class SpawnBlock : GameComponent
         {
             CreateBlock(-5, Direction.xPos);
         }
+
+        isDone = true;
 
         base.Initialize();
     }
