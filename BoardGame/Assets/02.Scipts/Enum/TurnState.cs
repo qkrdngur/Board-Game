@@ -2,7 +2,7 @@ namespace BoardGame.Util
 {
     public enum PlayTurn
     {
-        player,
+        player = 0,
         FirAi,
         SecAi,
         TirAi

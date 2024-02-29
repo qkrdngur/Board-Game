@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace BoardGame.Util
 {
     public abstract class GameComponent : IGameComponent

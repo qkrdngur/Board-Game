@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
 using BoardGame.Util;
+using DG.Tweening;
+using UnityEngine;
 
 public class PlayerMovement : GameComponent
 {
@@ -34,7 +32,14 @@ public class PlayerMovement : GameComponent
     protected override void OnMove()
     {
         base.OnMove();
+
         Jump();
+        CurentBlock();
+    }
+
+    private void CurentBlock()
+    {
+        GameManager.Instance.curBlock[PlayTurn.player] = (jumpNum % GameManager.Instance.blockPos.Count);
     }
 
     private void Jump()

@@ -1,7 +1,6 @@
-using System.Collections;
+using BoardGame.Util;
 using System.Collections.Generic;
 using UnityEngine;
-using BoardGame.Util;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -12,12 +11,17 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<Transform> blockPos;
     [HideInInspector] public List<PlayTurn> blockRot;
 
+    public List<GameObject> building;
+
     public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<int, PlayTurn> BuildingOwner = new Dictionary<int, PlayTurn>();
+    public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
 
     private readonly List<IGameComponent> _components = new();
 
     public readonly int GRADE = 12;
+
     public int jumpCount;
 
     private void Awake()

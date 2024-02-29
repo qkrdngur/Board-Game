@@ -64,25 +64,25 @@ public class SpawnBlock : GameComponent
     {
         var newObj = ObjectPool.instance.GetObject(BlockType(poolType));
 
-        if ((GameManager.Instance.blockPos.Count + 1) % 10 == 0)
+        if ((GameManager.Instance.blockPos.Count) % 10 == 0)
         {
             Transform child = newObj.transform.GetChild(0);
 
-            child.Rotate(new Vector3(0, 0, -45));
-            child.position = new Vector3(-0.6f, 2, -0.6f);
+            child.Rotate(new Vector3(0, 0, 45));
+            child.position = new Vector3(.7f, 2f, 1.7f);
         }
 
         newObj.transform.Rotate(new Vector3(0, rotate, 0));
 
         if (dir == Direction.zPos)
         {
-            savePos += new Vector3(0, 0, sign);
             newObj.transform.position = savePos;
+            savePos += new Vector3(0, 0, sign);
         }
         else
         {
-            savePos += new Vector3(sign, 0, 0);
             newObj.transform.position = savePos;
+            savePos += new Vector3(sign, 0, 0);
         }
 
         GameManager.Instance.blockPos.Add(newObj.transform);

@@ -10,6 +10,9 @@ namespace BoardGame.Util
         SecAi,
         ThiAi,
         RedDice,
-        WhiteDice
+        WhiteDice,
+        Build1,
+        Build2,
+        Build3
     }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using BoardGame.Util;
 using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Dice : GameComponent
 {
