@@ -69,7 +69,7 @@ public class SpawnBlock : GameComponent
             Transform child = newObj.transform.GetChild(0);
 
             child.Rotate(new Vector3(0, 0, 45));
-            child.position = new Vector3(.7f, 2f, 1.7f);
+            child.position = new Vector3(0.7f, 2f, 1.7f);
         }
 
         newObj.transform.Rotate(new Vector3(0, rotate, 0));

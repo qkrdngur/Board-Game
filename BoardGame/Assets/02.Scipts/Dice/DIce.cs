@@ -21,20 +21,47 @@ public class Dice : GameComponent
 
     public Dice(GameManager game) : base(game) { }
 
+
     protected override void OnRunning()
     {
         if (Red != null || White != null) return;
 
         base.OnRunning();
 
-        Red = ObjectPool.instance.GetObject(PoolObjectType.RedDice);
-        White = ObjectPool.instance.GetObject(PoolObjectType.WhiteDice);
 
-        Red.transform.position = UiManager.Instance.dicePoint.position - new Vector3(-3, 0, 0);
-        White.transform.position = UiManager.Instance.dicePoint.position - new Vector3(3, 0, 0);
+        CreateDice();
+        Reset();
 
         ChildObj(Red);
         ChildObj(White);
+    }
+
+    protected override void OnBuild()
+    {
+        base.OnBuild();
+
+        DeleteDice();
+    }
+
+    private void Reset()
+    {
+        Red.transform.position = UiManager.Instance.dicePoint.position - new Vector3(-3, 0, 0);
+        White.transform.position = UiManager.Instance.dicePoint.position - new Vector3(3, 0, 0);
+    }
+
+    private void CreateDice()
+    {
+        Red = ObjectPool.instance.GetObject(PoolObjectType.RedDice);
+        White = ObjectPool.instance.GetObject(PoolObjectType.WhiteDice);
+    }
+
+    private void DeleteDice()
+    {
+        ObjectPool.instance.ReturnObject(PoolObjectType.WhiteDice, White);
+        ObjectPool.instance.ReturnObject(PoolObjectType.RedDice, Red);
+
+        White = null;
+        Red = null;
     }
 
     private void ChildObj(GameObject parent)
@@ -57,6 +84,7 @@ public class Dice : GameComponent
 
     private void DiceAnim()
     {
+
         GameObject[] obj = { Red, White };
         float[] value = { 700, 600 };
 
