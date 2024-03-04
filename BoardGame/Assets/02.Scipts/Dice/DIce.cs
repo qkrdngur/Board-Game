@@ -28,7 +28,6 @@ public class Dice : GameComponent
 
         base.OnRunning();
 
-
         CreateDice();
         Reset();
 
@@ -86,7 +85,7 @@ public class Dice : GameComponent
     {
 
         GameObject[] obj = { Red, White };
-        float[] value = { 700, 600 };
+        float[] value = { 800, 700 };
 
         ThrowDice(obj, value);
     }
