@@ -44,6 +44,8 @@ public class Dice : GameComponent
 
     private void Reset()
     {
+        diceChildList.Clear();
+
         Red.transform.position = UiManager.Instance.dicePoint.position - new Vector3(-3, 0, 0);
         White.transform.position = UiManager.Instance.dicePoint.position - new Vector3(3, 0, 0);
     }
@@ -151,7 +153,7 @@ public class Dice : GameComponent
             }
             count += save;
         }
-
+        Debug.Log(count);
         GameManager.Instance.jumpCount = count;
         GameManager.Instance.UpdateState(GameState.Move);
     }

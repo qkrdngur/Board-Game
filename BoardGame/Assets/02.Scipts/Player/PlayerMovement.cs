@@ -48,7 +48,7 @@ public class PlayerMovement : GameComponent
 
         Sequence seq = DOTween.Sequence();
         for (int i = 0; i < GameManager.Instance.jumpCount; i++)
-            seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[jumpNum++ % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
+            seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[++jumpNum % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
                     .SetEase(Ease.OutQuad));
 
         seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));

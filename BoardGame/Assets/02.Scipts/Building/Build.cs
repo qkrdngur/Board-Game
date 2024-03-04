@@ -1,5 +1,6 @@
 using BoardGame.Util;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Build : GameComponent
@@ -44,6 +45,9 @@ public class Build : GameComponent
         obj.transform.position = GameManager.Instance.blockPos[GameManager.Instance.curBlock[PlayTurn.player]].position;
 
         GameManager.Instance.BuildingOwner[GameManager.Instance.curBlock[PlayTurn.player]] = PlayTurn.player;
+
+        Transform child = GameManager.Instance.blockPos[GameManager.Instance.curBlock[PlayTurn.player]].GetChild(0);
+        child.GetComponent<TextMeshPro>().text = PlayTurn.player.ToString();
 
         GameManager.Instance.UpdateState(GameState.Main);
     }
