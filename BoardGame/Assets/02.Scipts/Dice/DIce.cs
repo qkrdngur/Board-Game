@@ -153,7 +153,7 @@ public class Dice : GameComponent
             }
             count += save;
         }
-        Debug.Log(count);
+
         GameManager.Instance.jumpCount = count;
         GameManager.Instance.UpdateState(GameState.Move);
     }

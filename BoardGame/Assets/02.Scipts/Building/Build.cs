@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum CurTower
+{
+    tower01,
+    tower02,
+    tower03
+}
+
 public class Build : GameComponent
 {
-    private Dictionary<string, int> buildCount = new Dictionary<string, int>();
-    private Dictionary<string, int> buildPrice = new Dictionary<string, int>();
+    private Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
+    private Dictionary<int, int> buildPrice = new Dictionary<int, int>();
 
     public Build(GameManager game) : base(game)
     {
@@ -22,11 +29,10 @@ public class Build : GameComponent
 
         for (int i = 0; i < count; i++)
         {
-            string regionName = GameManager.Instance.blockSO.RegionName[i];
             int price = GameManager.Instance.blockSO.BuildPrice[i];
 
-            buildCount[regionName] = 0;
-            buildPrice[regionName] = price;
+            buildCount[i] = (CurTower)0;
+            buildPrice[i] = price;
         }
     }
 
@@ -42,12 +48,15 @@ public class Build : GameComponent
 
         GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1);
         Debug.Log(GameManager.Instance.curBlock[PlayTurn.player]);
-        obj.transform.position = GameManager.Instance.blockPos[GameManager.Instance.curBlock[PlayTurn.player]].position;
+        obj.transform.position = GameManager.Instance.blockPos[GameManager.Instance.curBlock[GameManager.Instance.pTurn]].position;
 
-        GameManager.Instance.BuildingOwner[GameManager.Instance.curBlock[PlayTurn.player]] = PlayTurn.player;
+        GameManager.Instance.BuildingOwner[GameManager.Instance.curBlock[GameManager.Instance.pTurn]] = GameManager.Instance.pTurn;
 
-        Transform child = GameManager.Instance.blockPos[GameManager.Instance.curBlock[PlayTurn.player]].GetChild(0);
-        child.GetComponent<TextMeshPro>().text = PlayTurn.player.ToString();
+        Transform child = GameManager.Instance.blockPos[GameManager.Instance.curBlock[GameManager.Instance.pTurn]].GetChild(0);
+        child.GetComponent<TextMeshPro>().text = "ssss";
+
+        buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]] = CurTower.tower01;
+        Debug.Log(buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]]);
 
         GameManager.Instance.UpdateState(GameState.Main);
     }
@@ -58,7 +67,6 @@ public class Build : GameComponent
         {
             if ((GameManager.Instance.curBlock[(PlayTurn)i]) % 10 == 0/*&& GameManager.instance.pTurn == (PlayTurn)i*/)
             {
-                Debug.Log("ssssssss");
                 GameManager.Instance.UpdateState(GameState.Main);
                 return true;
             }
