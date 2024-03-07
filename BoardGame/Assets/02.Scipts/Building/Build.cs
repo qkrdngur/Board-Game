@@ -12,7 +12,6 @@ public enum CurTower
 
 public class Build : GameComponent
 {
-    private Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
     private Dictionary<int, int> buildPrice = new Dictionary<int, int>();
 
     public Build(GameManager game) : base(game)
@@ -31,7 +30,7 @@ public class Build : GameComponent
         {
             int price = GameManager.Instance.blockSO.BuildPrice[i];
 
-            buildCount[i] = (CurTower)0;
+            GameManager.Instance.buildCount[i] = 0;
             buildPrice[i] = price;
         }
     }
@@ -55,8 +54,7 @@ public class Build : GameComponent
         Transform child = GameManager.Instance.blockPos[GameManager.Instance.curBlock[GameManager.Instance.pTurn]].GetChild(0);
         child.GetComponent<TextMeshPro>().text = "ssss";
 
-        buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]] = CurTower.tower01;
-        Debug.Log(buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]]);
+        GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]] = CurTower.tower01;
 
         GameManager.Instance.UpdateState(GameState.Main);
     }

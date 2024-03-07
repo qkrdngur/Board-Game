@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<GameObject> building;
 
+    public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
     public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
     public Dictionary<int, PlayTurn> BuildingOwner = new Dictionary<int, PlayTurn>();
     public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();

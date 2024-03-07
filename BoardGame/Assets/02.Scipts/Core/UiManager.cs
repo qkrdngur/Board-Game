@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using BoardGame.Util;
+using UnityEngine.UI;
 
 public class UiManager : MonoSingleton<UiManager>
 {
@@ -10,6 +11,7 @@ public class UiManager : MonoSingleton<UiManager>
     [HideInInspector] public bool isSpin = false;
 
     [SerializeField] private RectTransform buildUi;
+    [SerializeField] private GameObject[] towerImg;
 
     public Transform dicePoint;
     public int towerNum;
@@ -21,10 +23,23 @@ public class UiManager : MonoSingleton<UiManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
             ShowUI();
+            UndoImg();
+        }
     }
-    
+
+    private void UndoImg()
+    {
+        int objNum = (int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]];
+
+        for(int i = 0; i < objNum; i++)
+        {
+            towerImg[i].gameObject.SetActive(false);
+        }
+    }
+
     public void ShowUI()
     {
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
