@@ -12,6 +12,7 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private RectTransform buildUi;
 
     public Transform dicePoint;
+    public int towerNum;
 
     private void Start()
     {
@@ -39,5 +40,10 @@ public class UiManager : MonoSingleton<UiManager>
         grade = dice.CaculateGrade();
 
         isSpin = true;
+    }
+
+    public void OnBtn(int value)
+    {
+        towerNum = value;
     }
 }
