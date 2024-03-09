@@ -14,7 +14,7 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private GameObject[] towerImg;
 
     public Transform dicePoint;
-    public int towerNum;
+    private int towerNum;
 
     private void Start()
     {
@@ -60,5 +60,7 @@ public class UiManager : MonoSingleton<UiManager>
     public void OnBtn(int value)
     {
         towerNum = value;
+
+        GameManager.Instance.tower = (CurTower)towerNum;
     }
 }

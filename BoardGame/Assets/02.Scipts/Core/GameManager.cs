@@ -1,9 +1,11 @@
 using BoardGame.Util;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public CurTower tower;
     public PlayTurn pTurn;
     public GameState State;
     public BlockName blockSO;
@@ -38,6 +40,13 @@ public class GameManager : MonoSingleton<GameManager>
         UpdateState(GameState.Init);
     }
 
+    void Update()
+    {
+        if (State == GameState.Main)
+            foreach (var component in _components)
+                component.OnRoutine();
+    }
+
     public void UpdateState(GameState state)
     {
         State = state;
@@ -53,10 +62,17 @@ public class GameManager : MonoSingleton<GameManager>
         pTurn = (PlayTurn)next;
     }
 
-    void Update()
+    public void Build()
     {
-        if (State == GameState.Main)
-            foreach (var component in _components)
-                component.OnRoutine();
+        GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1);
+        Debug.Log(curBlock[PlayTurn.player]);
+        obj.transform.position = blockPos[curBlock[pTurn]].position;
+
+        BuildingOwner[curBlock[pTurn]] = pTurn;
+
+        Transform child = blockPos[curBlock[pTurn]].GetChild(0);
+        child.GetComponent<TextMeshPro>().text = "ssss";
+
+        buildCount[curBlock[pTurn]] = CurTower.tower01;
     }
 }
