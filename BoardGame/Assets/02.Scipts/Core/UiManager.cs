@@ -32,6 +32,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     private void UndoImg()
     {
+        print((int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]]);
         int objNum = (int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]];
 
         for(int i = 0; i < objNum; i++)

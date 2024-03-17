@@ -14,7 +14,6 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<PlayTurn> blockRot;
 
     public List<GameObject> building;
-
     public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
     public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
     public Dictionary<int, PlayTurn> BuildingOwner = new Dictionary<int, PlayTurn>();
