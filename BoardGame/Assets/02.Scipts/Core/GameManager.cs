@@ -63,15 +63,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Build()
     {
-        GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1);
-        Debug.Log(curBlock[PlayTurn.player]);
-        obj.transform.position = blockPos[curBlock[pTurn]].position;
-
         BuildingOwner[curBlock[pTurn]] = pTurn;
 
         Transform child = blockPos[curBlock[pTurn]].GetChild(0);
         child.GetComponent<TextMeshPro>().text = "ssss";
 
-        buildCount[curBlock[pTurn]] = CurTower.tower01;
+        buildCount[curBlock[pTurn]] = tower;
+    }
+
+    public void BuildTower()
+    {
+        for (int i = 0; i < (int)tower; i++)
+        {
+            GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
+            Debug.Log(curBlock[PlayTurn.player]);
+            obj.transform.position = blockPos[curBlock[pTurn]].position;
+        }
     }
 }
