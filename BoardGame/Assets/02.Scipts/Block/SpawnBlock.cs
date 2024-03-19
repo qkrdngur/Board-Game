@@ -15,7 +15,6 @@ public class SpawnBlock : GameComponent
     private PoolObjectType poolType = PoolObjectType.block01;
 
     private float routineNum = 40;
-
     private bool isDone = false;
 
     private Vector3 savePos = Vector3.zero;
@@ -57,6 +56,7 @@ public class SpawnBlock : GameComponent
     {
         var newObj = ObjectPool.instance.GetObject(PoolObjectType.ground);
         newObj.transform.position = new Vector3(25, -2, 25);
+
         return newObj;
     }
 
@@ -72,9 +72,25 @@ public class SpawnBlock : GameComponent
             child.position = new Vector3(0.7f, 2f, 1.7f);
         }
 
+        SaveTowerPos(newObj.transform.GetChild(1));
+        PositionAdj(dir, sign, newObj);
+
         newObj.transform.Rotate(new Vector3(0, rotate, 0));
 
-        if (dir == Direction.zPos)
+        GameManager.Instance.blockPos.Add(newObj.transform);
+    }
+
+    private void SaveTowerPos(Transform parent)
+    {
+        foreach(var child in parent)
+        {
+            //
+        }
+    }
+
+    private void PositionAdj(Direction value, int sign, GameObject newObj)
+    {
+        if (value == Direction.zPos)
         {
             newObj.transform.position = savePos;
             savePos += new Vector3(0, 0, sign);
@@ -84,8 +100,6 @@ public class SpawnBlock : GameComponent
             newObj.transform.position = savePos;
             savePos += new Vector3(sign, 0, 0);
         }
-
-        GameManager.Instance.blockPos.Add(newObj.transform);
     }
 
     private PoolObjectType BlockType(PoolObjectType type)

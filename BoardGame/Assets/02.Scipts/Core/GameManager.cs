@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    [HideInInspector] public List<Transform> blockPos;
+    [HideInInspector] public List<Transform> towerPos;
+    [HideInInspector] public List<PlayTurn> blockRot;
+    
     public CurTower tower;
     public PlayTurn pTurn;
     public GameState State;
     public BlockName blockSO;
-
-    [HideInInspector] public List<Transform> blockPos;
-    [HideInInspector] public List<PlayTurn> blockRot;
 
     public List<GameObject> building;
     public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
@@ -65,6 +66,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         BuildingOwner[curBlock[pTurn]] = pTurn;
 
+        BuildTower();
+
         Transform child = blockPos[curBlock[pTurn]].GetChild(0);
         child.GetComponent<TextMeshPro>().text = "ssss";
 
@@ -73,11 +76,18 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void BuildTower()
     {
+        Vector3[] pos =
+        {
+            new Vector3(0, 2f, 0),
+            new Vector3(-1f, 2f, 0),
+            new Vector3(1f, 2f, 0)
+        };
+
         for (int i = 0; i < (int)tower; i++)
         {
             GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
             Debug.Log(curBlock[PlayTurn.player]);
-            obj.transform.position = blockPos[curBlock[pTurn]].position;
+            obj.transform.position = blockPos[curBlock[pTurn]].position + pos[i];
         }
     }
 }
