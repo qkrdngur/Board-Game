@@ -30,14 +30,14 @@ public class UiManager : MonoSingleton<UiManager>
         }
     }
 
-    private void UndoImg()
+    public void UndoImg()
     {
-        print((int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]]);
         int objNum = (int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]];
 
-        for(int i = 0; i < objNum; i++)
+        for (int i = 0; i < objNum; i++)
         {
-            towerImg[i].gameObject.SetActive(false);
+            if (towerImg[i].activeSelf)
+                towerImg[i].gameObject.SetActive(false);
         }
     }
 
@@ -46,9 +46,10 @@ public class UiManager : MonoSingleton<UiManager>
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
     }
 
-    public void UnShowUI()
+    public void UndoUI()
     {
-        buildUi.transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.InOutQuint);
+        buildUi.transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.InOutQuint)
+            .OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
     }
 
     public void OnBtn()

@@ -15,13 +15,14 @@ public class GameManager : MonoSingleton<GameManager>
     public BlockName blockSO;
 
     public List<GameObject> building;
-    public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
     public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
     public Dictionary<int, PlayTurn> BuildingOwner = new Dictionary<int, PlayTurn>();
+    public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
     public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
 
     private readonly List<IGameComponent> _components = new();
+    private Dictionary<int, int> built = new Dictionary<int, int>();
 
     public readonly int GRADE = 12;
 
@@ -38,6 +39,16 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         UpdateState(GameState.Init);
+
+        ResetDic();
+    }
+
+    private void ResetDic()
+    {
+        for(int i = 0; i < blockPos.Count; i++)
+        {
+            built[i] = 0;
+        }
     }
 
     void Update()
@@ -65,29 +76,31 @@ public class GameManager : MonoSingleton<GameManager>
     public void Build()
     {
         BuildingOwner[curBlock[pTurn]] = pTurn;
-
+        buildCount[curBlock[pTurn]] = tower;
+        
         BuildTower();
 
         Transform child = blockPos[curBlock[pTurn]].GetChild(0);
         child.GetComponent<TextMeshPro>().text = "ssss";
-
-        buildCount[curBlock[pTurn]] = tower;
     }
 
     public void BuildTower()
     {
-        Vector3[] pos =
-        {
-            new Vector3(0, 2f, 0),
-            new Vector3(-1f, 2f, 0),
-            new Vector3(1f, 2f, 0)
-        };
-
+        //print(built[curBlock[pTurn]]);//이거 받아오는게 안됨 초기화 문제인듯
         for (int i = 0; i < (int)tower; i++)
         {
+            if (i < (int)buildCount[curBlock[pTurn]]) continue;
+
             GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
-            Debug.Log(curBlock[PlayTurn.player]);
-            obj.transform.position = blockPos[curBlock[pTurn]].position + pos[i];
+            obj.transform.position = BuildingPos(i).position;
         }
+
+        built[curBlock[pTurn]] = (int)buildCount[curBlock[pTurn]];
+    }
+
+    private Transform BuildingPos(int idx)
+    {
+        Transform child = blockPos[curBlock[pTurn]].GetChild(1);
+        return child.GetChild(idx);
     }
 }

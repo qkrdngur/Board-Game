@@ -51,6 +51,6 @@ public class PlayerMovement : GameComponent
             seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[++jumpNum % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
                     .SetEase(Ease.OutQuad));
 
-        seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
+        seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Select));
     }
 }

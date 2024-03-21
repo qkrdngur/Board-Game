@@ -35,6 +35,20 @@ public class Build : GameComponent
         }
     }
 
+    protected override void OnSelect()
+    {
+        UiManager.Instance.ShowUI();
+        UiManager.Instance.UndoImg();
+    }
+
+    protected override void OnBuild()
+    {
+        if (Return()) return;
+
+        GameManager.Instance.Build();
+        StateMain();
+    }
+
     private void ReSet()
     {
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
@@ -44,14 +58,6 @@ public class Build : GameComponent
     private void StateMain()
     {
         GameManager.Instance.UpdateState(GameState.Main);
-    }
-
-    protected override void OnBuild()
-    {
-        if (Return()) return;
-
-        GameManager.Instance.Build();
-        StateMain();
     }
 
     private bool Return()

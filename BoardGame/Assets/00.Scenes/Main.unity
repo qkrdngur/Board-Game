@@ -156,8 +156,11 @@ MonoBehaviour:
   grade: 0
   isSpin: 0
   buildUi: {fileID: 1806884033}
+  towerImg:
+  - {fileID: 1561866222}
+  - {fileID: 1258573963}
+  - {fileID: 745977531}
   dicePoint: {fileID: 2009290515}
-  towerNum: 0
 --- !u!4 &93665415
 Transform:
   m_ObjectHideFlags: 0
@@ -1365,7 +1368,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93665414}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: UnShowUI
+        m_MethodName: UndoUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1976,11 +1979,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a5f5c1ce6fc964fa337690befe91e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockPos: []
+  towerPos: []
+  blockRot: 
+  tower: 0
   pTurn: 0
   State: 0
   blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
-  blockPos: []
-  blockRot: 
   building:
   - {fileID: 1401316562394359041, guid: 730ed5657f0709248b3c5525bfc06085, type: 3}
   - {fileID: 3420029994855067288, guid: 2dd0f405b78f4774ebd9146b735f5465, type: 3}
