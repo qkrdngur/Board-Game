@@ -47,9 +47,16 @@ public class SpawnBlock : GameComponent
             CreateBlock(-5, 360, Direction.xPos);
         }
 
+        ResetDic();
         isDone = true;
 
         base.Initialize();
+    }
+
+    private void ResetDic()
+    {
+        for (int i = 0; i < GameManager.Instance.blockPos.Count; i++)
+            GameManager.Instance.built[i] = 0;
     }
 
     private GameObject CreateGround()
@@ -72,20 +79,11 @@ public class SpawnBlock : GameComponent
             child.position = new Vector3(0.7f, 2f, 1.7f);
         }
 
-        SaveTowerPos(newObj.transform.GetChild(1));
         PositionAdj(dir, sign, newObj);
 
         newObj.transform.Rotate(new Vector3(0, rotate, 0));
 
         GameManager.Instance.blockPos.Add(newObj.transform);
-    }
-
-    private void SaveTowerPos(Transform parent)
-    {
-        foreach(var child in parent)
-        {
-            //
-        }
     }
 
     private void PositionAdj(Direction value, int sign, GameObject newObj)

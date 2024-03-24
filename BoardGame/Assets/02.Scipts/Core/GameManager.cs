@@ -8,7 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<Transform> blockPos;
     [HideInInspector] public List<Transform> towerPos;
     [HideInInspector] public List<PlayTurn> blockRot;
-    
+
     public CurTower tower;
     public PlayTurn pTurn;
     public GameState State;
@@ -21,8 +21,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
 
+    public Dictionary<int, int> built = new Dictionary<int, int>();
     private readonly List<IGameComponent> _components = new();
-    private Dictionary<int, int> built = new Dictionary<int, int>();
 
     public readonly int GRADE = 12;
 
@@ -39,16 +39,6 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         UpdateState(GameState.Init);
-
-        ResetDic();
-    }
-
-    private void ResetDic()
-    {
-        for(int i = 0; i < blockPos.Count; i++)
-        {
-            built[i] = 0;
-        }
     }
 
     void Update()
@@ -89,7 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
         //print(built[curBlock[pTurn]]);//이거 받아오는게 안됨 초기화 문제인듯
         for (int i = 0; i < (int)tower; i++)
         {
-            if (i < (int)buildCount[curBlock[pTurn]]) continue;
+            if (i < built[curBlock[pTurn]]) continue;
 
             GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
             obj.transform.position = BuildingPos(i).position;
