@@ -21,15 +21,6 @@ public class UiManager : MonoSingleton<UiManager>
         dice = GetComponent<DiceGague>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ShowUI();
-            UndoImg();
-        }
-    }
-
     public void UndoImg()
     {
         int objNum = (int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]];

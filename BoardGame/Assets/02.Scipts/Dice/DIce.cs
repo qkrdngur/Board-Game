@@ -19,8 +19,9 @@ public class Dice : GameComponent
     private float jumpPower;
     private float rotPower;
 
-    public Dice(GameManager game) : base(game) { }
+    private int saveCnt = 0;
 
+    public Dice(GameManager game) : base(game) { }
 
     protected override void OnRunning()
     {
@@ -78,6 +79,9 @@ public class Dice : GameComponent
     protected override void OnUpdate()
     {
         base.OnUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            saveCnt = 8;
 
         if (UiManager.Instance.isSpin)
             DiceAnim();
@@ -143,15 +147,18 @@ public class Dice : GameComponent
             float highY = float.MinValue;
             int save = 0;
 
-            foreach (var item in list)
-            {
-                if (highY < item.position.y)
+            if (saveCnt == 0)
+                foreach (var item in list)
                 {
-                    highY = item.position.y;
-                    int.TryParse(item.name, out save);
+                    if (highY < item.position.y)
+                    {
+                        highY = item.position.y;
+                        int.TryParse(item.name, out save);
+                    }
                 }
-            }
-            count += save;
+
+            count += saveCnt;
+            saveCnt = 0;
         }
 
         GameManager.Instance.jumpCount = count;

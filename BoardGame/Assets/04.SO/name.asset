@@ -12,5 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21714b8e14aa40e4bb2f5fc1afd0fe3c, type: 3}
   m_Name: name
   m_EditorClassIdentifier: 
-  RegionName: []
-  BuildPrice: 
+  RegionName:
+  - s
+  - s
+  - s
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - s
+  - ss
+  - s
+  - s
+  - s
+  - s
+  - ss
+  BuildPrice: 000000000a000000140000001e00000028000000320000003c00000046000000500000005a000000640000006e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000c8000000d2000000dc000000e6000000f0000000fa000000040100000e01000018010000220100002c01000036010000400100004a010000540100005e01000068010000720100007c01000086010000

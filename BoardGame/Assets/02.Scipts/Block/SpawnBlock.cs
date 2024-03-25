@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BoardGame.Util;
 using System;
+using TMPro;
 
 public enum Direction
 {
@@ -28,6 +29,14 @@ public class SpawnBlock : GameComponent
     {
         if (isDone) return;
 
+        SpawnObj();
+        ResetDic();
+
+        isDone = true;
+    }
+
+    private void SpawnObj()
+    {
         CreateGround();
 
         for (int i = 0; i < routineNum / 4; i++)
@@ -46,13 +55,7 @@ public class SpawnBlock : GameComponent
         {
             CreateBlock(-5, 360, Direction.xPos);
         }
-
-        ResetDic();
-        isDone = true;
-
-        base.Initialize();
     }
-
     private void ResetDic()
     {
         for (int i = 0; i < GameManager.Instance.blockPos.Count; i++)
@@ -67,18 +70,28 @@ public class SpawnBlock : GameComponent
         return newObj;
     }
 
+    private void CornerPos(Transform child)
+    {
+        if ((GameManager.Instance.blockPos.Count) % 10 == 0)
+        {
+            child.Rotate(new Vector3(0, 0, 45));
+            child.position = new Vector3(0.7f, 2f, 1.7f);
+        }
+    }
+    private void SetRegion(Transform child)
+    {
+        string name = GameManager.Instance.blockSO.RegionName[GameManager.Instance.blockPos.Count];
+        child.GetComponent<TextMeshPro>().text = name;
+    }
+
     private void CreateBlock(int sign, int rotate, Direction dir)
     {
         var newObj = ObjectPool.instance.GetObject(BlockType(poolType));
 
-        if ((GameManager.Instance.blockPos.Count) % 10 == 0)
-        {
-            Transform child = newObj.transform.GetChild(0);
+        Transform child = newObj.transform.GetChild(0);
 
-            child.Rotate(new Vector3(0, 0, 45));
-            child.position = new Vector3(0.7f, 2f, 1.7f);
-        }
-
+        CornerPos(child);
+        SetRegion(child);
         PositionAdj(dir, sign, newObj);
 
         newObj.transform.Rotate(new Vector3(0, rotate, 0));

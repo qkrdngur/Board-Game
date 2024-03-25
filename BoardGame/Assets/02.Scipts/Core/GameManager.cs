@@ -21,11 +21,12 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
 
+
+    public Dictionary<int, int> buildingPrice = new Dictionary<int, int>();
     public Dictionary<int, int> built = new Dictionary<int, int>();
     private readonly List<IGameComponent> _components = new();
 
     public readonly int GRADE = 12;
-
     public int jumpCount;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
         _components.Add(new PlayerMovement(this));
         _components.Add(new Dice(this));
         _components.Add(new Build(this));
+        _components.Add(new ResetValue(this));
     }
 
     void Start()
@@ -63,20 +65,18 @@ public class GameManager : MonoSingleton<GameManager>
         pTurn = (PlayTurn)next;
     }
 
+    #region Build
     public void Build()
     {
         BuildingOwner[curBlock[pTurn]] = pTurn;
         buildCount[curBlock[pTurn]] = tower;
-        
-        BuildTower();
 
-        Transform child = blockPos[curBlock[pTurn]].GetChild(0);
-        child.GetComponent<TextMeshPro>().text = "ssss";
+        BuildTower();
+        CalcPrice();
     }
 
-    public void BuildTower()
+    private void BuildTower()
     {
-        //print(built[curBlock[pTurn]]);//이거 받아오는게 안됨 초기화 문제인듯
         for (int i = 0; i < (int)tower; i++)
         {
             if (i < built[curBlock[pTurn]]) continue;
@@ -93,4 +93,26 @@ public class GameManager : MonoSingleton<GameManager>
         Transform child = blockPos[curBlock[pTurn]].GetChild(1);
         return child.GetChild(idx);
     }
+    #endregion
+
+    #region Price
+    public void CalcPrice()
+    {
+        buildingPrice[curBlock[pTurn]] = blockSO.BuildPrice[curBlock[pTurn]];
+
+        for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
+        {
+            PlayTurn curTurn = (PlayTurn)i;
+            int price = buildingPrice[curBlock[curTurn]];
+
+            if (price == 0 || (pTurn == curTurn)) continue;
+
+            if (BuildingOwner[curBlock[pTurn]] == curTurn)
+            {
+                money[curTurn] += price;
+                money[pTurn] -= price;
+            }
+        }
+    }
+    #endregion
 }

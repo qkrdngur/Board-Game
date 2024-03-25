@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : GameComponent
 {
-    public float jumpPower = 2f;
-    public float jumpDuration = 0.5f;
+    public float jumpPower = 1.5f;
+    public float jumpDuration = 0.1f;
 
     private int jumpNum = 0;
 
@@ -45,8 +45,8 @@ public class PlayerMovement : GameComponent
     private void Jump()
     {
         Transform pTrm = GameManager.Instance.player[PlayTurn.player].transform;
-
         Sequence seq = DOTween.Sequence();
+
         for (int i = 0; i < GameManager.Instance.jumpCount; i++)
             seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[++jumpNum % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
                     .SetEase(Ease.OutQuad));
