@@ -10,10 +10,18 @@ public class PlayerMovement : GameComponent
     private int jumpNum = 0;
 
     private GameObject player = null;
+    private GameManager manager;
 
     public PlayerMovement(GameManager game) : base(game)
     {
 
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+
+        manager = GameManager.Instance;
     }
 
     protected override void OnRunning()
@@ -22,11 +30,22 @@ public class PlayerMovement : GameComponent
 
         base.OnSetting();
 
-        player = ObjectPool.instance.GetObject(PoolObjectType.Player);
+        Vector3[] pos =
+        {
+            new Vector3(0, 5, 0),
+            new Vector3(1, 5, 0),
+            new Vector3(0, 5, 1),
+            new Vector3(1, 5, 1)
+        };
 
-        player.transform.position += new Vector3(0, 5, 0);
+        //나중에 ui로 게임 플레이 인원 정하여 인원만큼 for문 돌수있게
+        for (int i = 0; i < 4; i++)
+        {
+            player = ObjectPool.instance.GetObject((PoolObjectType)(i + 3));
+            player.transform.position += pos[i];
 
-        GameManager.Instance.player.Add(PlayTurn.player, player);
+            manager.player.Add((PlayTurn)i, player);
+        }
     }
 
     protected override void OnMove()
@@ -39,18 +58,20 @@ public class PlayerMovement : GameComponent
 
     private void CurentBlock()
     {
-        GameManager.Instance.curBlock[PlayTurn.player] = (jumpNum % GameManager.Instance.blockPos.Count);
+        manager.curBlock[PlayTurn.player] = (jumpNum % manager.blockPos.Count);
     }
 
     private void Jump()
     {
-        Transform pTrm = GameManager.Instance.player[PlayTurn.player].transform;
+        Transform pTrm = manager.player[manager.pTurn].transform;
         Sequence seq = DOTween.Sequence();
 
-        for (int i = 0; i < GameManager.Instance.jumpCount; i++)
-            seq.Append(pTrm.DOJump(GameManager.Instance.blockPos[++jumpNum % GameManager.Instance.blockPos.Count].position + new Vector3(0, 3, 0), jumpPower, 1, jumpDuration)
+        Vector3 jumpHigh = new Vector3(0, 3, 0);
+
+        for (int i = 0; i < manager.jumpCount; i++)
+            seq.Append(pTrm.DOJump(manager.blockPos[++jumpNum % manager.blockPos.Count].position + jumpHigh, jumpPower, 1, jumpDuration)
                     .SetEase(Ease.OutQuad));
 
-        seq.OnComplete(() => GameManager.Instance.UpdateState(GameState.Select));
+        seq.OnComplete(() => manager.UpdateState(GameState.Select));
     }
 }

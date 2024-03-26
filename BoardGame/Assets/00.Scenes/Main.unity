@@ -2470,6 +2470,18 @@ MonoBehaviour:
       type: 3}
     poolType: 11
     poolCount: 36
+  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
+      type: 3}
+    poolType: 4
+    poolCount: 1
+  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
+      type: 3}
+    poolType: 5
+    poolCount: 1
+  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
+      type: 3}
+    poolType: 6
+    poolCount: 1
   spawnPos: {fileID: 339682638}
 --- !u!1 &1913830529
 GameObject:

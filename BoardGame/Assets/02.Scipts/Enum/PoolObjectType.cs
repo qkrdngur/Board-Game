@@ -2,7 +2,7 @@ namespace BoardGame.Util
 {
     public enum PoolObjectType
     {
-        block01,
+        block01 = 0,
         block02,
         ground,
         Player,
