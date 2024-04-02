@@ -12,18 +12,29 @@ public enum CurTower
 
 public class Build : GameComponent
 {
+    GameManager manager;
+
     public Build(GameManager game) : base(game)
     {
-
+        manager = GameManager.Instance;
     }
 
     protected override void OnSelect()
     {
-        if ((GameManager.Instance.curBlock[GameManager.Instance.pTurn]) % 10 == 0) StateMain();
+        if ((manager.curBlock[manager.pTurn]) % 10 == 0) StateMain();
 
+        Debug.Log(GameManager.Instance.pTurn);
         UiManager.Instance.ShowUI();
         UiManager.Instance.UndoImg();
     }
+
+    protected override void OnTakeOver()
+    {
+        manager.CalcPrice(false);
+
+        manager.BuildingOwner[manager.curBlock[manager.pTurn]] = manager.pTurn;
+    }
+
     protected override void OnBuild()
     {
         if (Return()) return;
@@ -34,6 +45,7 @@ public class Build : GameComponent
 
     private void StateMain()
     {
+        GameManager.Instance.NextTurn(GameManager.Instance.pTurn);
         GameManager.Instance.UpdateState(GameState.Main);
     }
 

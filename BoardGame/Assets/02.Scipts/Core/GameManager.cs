@@ -72,7 +72,7 @@ public class GameManager : MonoSingleton<GameManager>
         buildCount[curBlock[pTurn]] = tower;
 
         BuildTower();
-        CalcPrice();
+        CalcPrice(true);
     }
 
     private void BuildTower()
@@ -96,20 +96,24 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
 
     #region Price
-    public void CalcPrice()
+    public void CalcPrice(bool value)
     {
         buildingPrice[curBlock[pTurn]] = blockSO.BuildPrice[curBlock[pTurn]];
 
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
         {
             PlayTurn curTurn = (PlayTurn)i;
+
             int price = buildingPrice[curBlock[curTurn]];
+            price *= (int)tower + 1;
 
             if (price == 0 || (pTurn == curTurn)) continue;
 
             if (BuildingOwner[curBlock[pTurn]] == curTurn)
             {
-                money[curTurn] += price;
+                if (built[curBlock[pTurn]] != 0 && value)
+                    money[curTurn] += price;
+
                 money[pTurn] -= price;
             }
         }

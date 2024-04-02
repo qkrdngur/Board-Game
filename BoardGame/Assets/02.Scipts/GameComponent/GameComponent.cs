@@ -25,6 +25,9 @@ namespace BoardGame.Util
                 case GameState.Move:
                     OnMove();
                     break;
+                case GameState.TakeOver:
+                    OnTakeOver();
+                    break;
                 case GameState.Select:
                     OnSelect();
                     break;
@@ -46,6 +49,8 @@ namespace BoardGame.Util
         protected virtual void OnUpdate() { }
 
         protected virtual void OnMove() { }
+
+        protected virtual void OnTakeOver() { }
 
         protected virtual void OnSelect() { }
 

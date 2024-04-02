@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UiManager : MonoSingleton<UiManager>
 {
     DiceGague dice;
+    GameManager manager;
 
     [HideInInspector] public float grade;
     [HideInInspector] public bool isSpin = false;
@@ -19,17 +20,17 @@ public class UiManager : MonoSingleton<UiManager>
     private void Start()
     {
         dice = GetComponent<DiceGague>();
+        manager = GameManager.Instance;
     }
 
     public void UndoImg()
     {
-        int objNum = (int)GameManager.Instance.buildCount[GameManager.Instance.curBlock[GameManager.Instance.pTurn]];
+        int objNum =
+            (int)manager.buildCount[manager.curBlock[manager.pTurn]];
 
         for (int i = 0; i < objNum; i++)
-        {
             if (towerImg[i].activeSelf)
                 towerImg[i].gameObject.SetActive(false);
-        }
     }
 
     public void ShowUI()
@@ -43,6 +44,7 @@ public class UiManager : MonoSingleton<UiManager>
             .OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
     }
 
+    #region Button
     public void OnBtn()
     {
         grade = dice.CaculateGrade();
@@ -50,10 +52,16 @@ public class UiManager : MonoSingleton<UiManager>
         isSpin = true;
     }
 
-    public void OnBtn(int value)
+    public void CalcTowerNum(int value) // °Ç¹° °¹¼ö
     {
         towerNum = value;
 
-        GameManager.Instance.tower = (CurTower)towerNum;
+        manager.tower = (CurTower)towerNum;
     }
+
+    public void TakeOverTower()
+    {
+
+    }
+    #endregion
 }
