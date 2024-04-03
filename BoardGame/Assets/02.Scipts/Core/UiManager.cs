@@ -28,8 +28,10 @@ public class UiManager : MonoSingleton<UiManager>
         int objNum =
             (int)manager.buildCount[manager.curBlock[manager.pTurn]];
 
-        for (int i = 0; i < objNum; i++)
-            if (towerImg[i].activeSelf)
+        for(int i = 0; i < towerImg.Length; i++)
+            towerImg[i].gameObject.SetActive(true);
+
+        for (int i = 0; i < objNum - 1; i++)
                 towerImg[i].gameObject.SetActive(false);
     }
 
@@ -57,6 +59,7 @@ public class UiManager : MonoSingleton<UiManager>
         towerNum = value;
 
         manager.tower = (CurTower)towerNum;
+        print(manager.tower);
     }
 
     public void TakeOverTower()

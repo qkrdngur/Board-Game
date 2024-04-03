@@ -79,7 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         for (int i = 0; i < (int)tower; i++)
         {
-            if (i < built[curBlock[pTurn]]) continue;
+            if (i < (built[curBlock[pTurn]])) continue;
 
             GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
             obj.transform.position = BuildingPos(i).position;
@@ -98,14 +98,13 @@ public class GameManager : MonoSingleton<GameManager>
     #region Price
     public void CalcPrice(bool value)
     {
-        buildingPrice[curBlock[pTurn]] = blockSO.BuildPrice[curBlock[pTurn]];
-
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
         {
             PlayTurn curTurn = (PlayTurn)i;
 
             int price = buildingPrice[curBlock[curTurn]];
-            price *= (int)tower + 1;
+            print(price);
+            price *= (int)tower;
 
             if (price == 0 || (pTurn == curTurn)) continue;
 
@@ -113,7 +112,6 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 if (built[curBlock[pTurn]] != 0 && value)
                     money[curTurn] += price;
-
                 money[pTurn] -= price;
             }
         }
