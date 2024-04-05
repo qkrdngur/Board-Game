@@ -31,7 +31,7 @@ public class UiManager : MonoSingleton<UiManager>
         for(int i = 0; i < towerImg.Length; i++)
             towerImg[i].gameObject.SetActive(true);
 
-        for (int i = 0; i < objNum - 1; i++)
+        for (int i = 0; i < objNum; i++)
                 towerImg[i].gameObject.SetActive(false);
     }
 
