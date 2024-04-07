@@ -68,11 +68,12 @@ public class GameManager : MonoSingleton<GameManager>
     #region Build
     public void Build()
     {
-        BuildingOwner[curBlock[pTurn]] = pTurn;
         buildCount[curBlock[pTurn]] = tower;
 
         BuildTower();
         CalcPrice(true);
+
+        BuildingOwner[curBlock[pTurn]] = pTurn;
     }
 
     private void BuildTower()
@@ -102,7 +103,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayTurn curTurn = (PlayTurn)i;
 
-            int price = buildingPrice[curBlock[curTurn]];
+            int price = buildingPrice[curBlock[pTurn]];
             print(price);
             price *= (int)tower;
 

@@ -23,7 +23,7 @@ public class ResetValue : GameComponent
         for (int i = 0; i < count; i++)
         {
             manager.buildingPrice[i] = manager.blockSO.BuildPrice[i];
-            manager.BuildingOwner[i] = PlayTurn.player;
+            //manager.BuildingOwner[i] = PlayTurn.player;
             manager.buildCount[i] = 0;
         }
 
