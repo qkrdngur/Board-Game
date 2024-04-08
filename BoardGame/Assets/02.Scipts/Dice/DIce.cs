@@ -25,6 +25,8 @@ public class Dice : GameComponent
 
     protected override void OnRunning()
     {
+        UiManager.Instance.DiceGage.SetActive(true);
+
         if (Red != null || White != null) return;
 
         base.OnRunning();
@@ -43,6 +45,18 @@ public class Dice : GameComponent
         DeleteDice();
     }
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            saveCnt = 8;
+
+        if (UiManager.Instance.isSpin)
+            DiceAnim();
+    }
+
+    #region Set
     private void Reset()
     {
         diceChildList.Clear();
@@ -75,18 +89,9 @@ public class Dice : GameComponent
 
         diceChildList.Add(children);
     }
+#endregion
 
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-            saveCnt = 8;
-
-        if (UiManager.Instance.isSpin)
-            DiceAnim();
-    }
-
+    #region DICE
     private void DiceAnim()
     {
 
@@ -161,7 +166,10 @@ public class Dice : GameComponent
             saveCnt = 0;
         }
 
+        UiManager.Instance.DiceGage.SetActive(false);
+
         GameManager.Instance.jumpCount = count;
         GameManager.Instance.UpdateState(GameState.Move);
     }
+    #endregion
 }

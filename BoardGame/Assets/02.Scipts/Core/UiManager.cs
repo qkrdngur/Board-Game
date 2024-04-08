@@ -15,6 +15,8 @@ public class UiManager : MonoSingleton<UiManager>
     [HideInInspector] public bool isSpin = false;
 
     public Transform dicePoint;
+    public GameObject DiceGage;
+
     private int towerNum;
 
     private void Awake()
