@@ -8,22 +8,23 @@ public class UiManager : MonoSingleton<UiManager>
     DiceGague dice;
     GameManager manager;
 
-    [HideInInspector] public float grade;
-    [HideInInspector] public bool isSpin = false;
-
     [SerializeField] private RectTransform buildUi;
     [SerializeField] private GameObject[] towerImg;
+
+    [HideInInspector] public float grade;
+    [HideInInspector] public bool isSpin = false;
 
     public Transform dicePoint;
     private int towerNum;
 
-    private void Start()
+    private void Awake()
     {
-        dice = GetComponent<DiceGague>();
         manager = GameManager.Instance;
+
+        dice = GetComponent<DiceGague>();
     }
 
-    public void UndoImg()
+    public void UndoImg() //타워 건설 버튼
     {
         int objNum =
             (int)manager.buildCount[manager.curBlock[manager.pTurn]];
@@ -35,6 +36,7 @@ public class UiManager : MonoSingleton<UiManager>
                 towerImg[i].gameObject.SetActive(false);
     }
 
+    #region UIDotWeen
     public void ShowUI()
     {
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
@@ -45,6 +47,7 @@ public class UiManager : MonoSingleton<UiManager>
         buildUi.transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.InOutQuint)
             .OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
     }
+    #endregion
 
     #region Button
     public void OnBtn()
@@ -60,11 +63,6 @@ public class UiManager : MonoSingleton<UiManager>
 
         manager.tower = (CurTower)towerNum;
         print(manager.tower);
-    }
-
-    public void TakeOverTower()
-    {
-
     }
     #endregion
 }

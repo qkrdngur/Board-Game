@@ -8,7 +8,6 @@ public class PlayerMovement : GameComponent
     public float jumpPower = 1.5f;
     public float jumpDuration = 0.1f;
 
-    private int jumpNum = 0;
     private Dictionary<PlayTurn, int> JumpNum = new Dictionary<PlayTurn, int>();
 
     private GameObject player = null;
