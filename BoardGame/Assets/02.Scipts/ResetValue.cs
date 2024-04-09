@@ -32,5 +32,7 @@ public class ResetValue : GameComponent
             manager.curBlock[(PlayTurn)i] = 0;
             manager.money[(PlayTurn)i] = initPrice;
         }
+
+        //UiManager.Instance.PlayerUISetUp(manager.);
     }
 }

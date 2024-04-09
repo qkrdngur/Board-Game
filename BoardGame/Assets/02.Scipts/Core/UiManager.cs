@@ -1,6 +1,8 @@
-using DG.Tweening;
-using UnityEngine;
 using BoardGame.Util;
+using DG.Tweening;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoSingleton<UiManager>
@@ -11,9 +13,10 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private RectTransform buildUi;
     [SerializeField] private GameObject[] towerImg;
 
-    [HideInInspector] public float grade;
-    [HideInInspector] public bool isSpin = false;
+    public bool isSpin { get; set; } = false;
+    public float grade { get; private set; }
 
+    public List<GameObject> playerUI;
     public Transform dicePoint;
     public GameObject DiceGage;
 
@@ -22,8 +25,21 @@ public class UiManager : MonoSingleton<UiManager>
     private void Awake()
     {
         manager = GameManager.Instance;
-
         dice = GetComponent<DiceGague>();
+    }
+
+    public void PlayerUISetUp(ref List<Sprite> img, ref List<string> name, ref List<int> money)
+    {
+        int idx = 0;
+
+        foreach(GameObject player in playerUI)
+        {
+            player.GetComponentInChildren<Image>().sprite = img[idx];
+            player.transform.Find("Name").GetComponentInChildren<TextMeshPro>().text = name[idx];
+            player.transform.Find("Money").GetComponentInChildren<TextMeshPro>().text = money[idx].ToString();
+
+            idx++;
+        }
     }
 
     public void UndoImg() //타워 건설 버튼
@@ -31,11 +47,11 @@ public class UiManager : MonoSingleton<UiManager>
         int objNum =
             (int)manager.buildCount[manager.curBlock[manager.pTurn]];
 
-        for(int i = 0; i < towerImg.Length; i++)
+        for (int i = 0; i < towerImg.Length; i++)
             towerImg[i].gameObject.SetActive(true);
 
         for (int i = 0; i < objNum; i++)
-                towerImg[i].gameObject.SetActive(false);
+            towerImg[i].gameObject.SetActive(false);
     }
 
     #region UIDotWeen
