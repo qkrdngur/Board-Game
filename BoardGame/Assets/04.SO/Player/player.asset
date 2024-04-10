@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef128a52fa726a646ba8bc7a719b2138, type: 3}
   m_Name: player
   m_EditorClassIdentifier: 
-  Img: []
-  Name: []
+  Img:
+  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
+  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
+  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
+  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
+  Name:
+  - ssss
+  - aaaa
+  - cccc
+  - cccc
   Money: 

@@ -33,6 +33,6 @@ public class ResetValue : GameComponent
             manager.money[(PlayTurn)i] = initPrice;
         }
 
-        //UiManager.Instance.PlayerUISetUp(manager.);
+        UiManager.Instance.PlayerUISetUp(manager.playerSO.Img, manager.playerSO.Name, manager.playerSO.Money);
     }
 }

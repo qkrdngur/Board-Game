@@ -294,8 +294,6 @@ MonoBehaviour:
   - {fileID: 1561866222}
   - {fileID: 1258573963}
   - {fileID: 745977531}
-  grade: 0
-  isSpin: 0
   playerUI:
   - {fileID: 306929000}
   - {fileID: 2035238747}
@@ -4338,6 +4336,7 @@ MonoBehaviour:
   pTurn: 0
   State: 0
   blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
+  playerSO: {fileID: 11400000, guid: d1fd4d92dd0a41842a6fd568c64867fa, type: 2}
   building:
   - {fileID: 1401316562394359041, guid: 730ed5657f0709248b3c5525bfc06085, type: 3}
   - {fileID: 3420029994855067288, guid: 2dd0f405b78f4774ebd9146b735f5465, type: 3}

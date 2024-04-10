@@ -12,7 +12,9 @@ public class GameManager : MonoSingleton<GameManager>
     public CurTower tower;
     public PlayTurn pTurn;
     public GameState State;
+
     public BlockName blockSO;
+    public PlayerSO playerSO;
 
     public List<GameObject> building;
     public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();

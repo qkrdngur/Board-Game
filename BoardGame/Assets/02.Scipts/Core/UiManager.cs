@@ -28,16 +28,17 @@ public class UiManager : MonoSingleton<UiManager>
         dice = GetComponent<DiceGague>();
     }
 
-    public void PlayerUISetUp(ref List<Sprite> img, ref List<string> name, ref List<int> money)
+    public void PlayerUISetUp(List<Sprite> img, List<string> name, List<int> money)
     {
         int idx = 0;
 
         foreach(GameObject player in playerUI)
         {
             player.GetComponentInChildren<Image>().sprite = img[idx];
-            player.transform.Find("Name").GetComponentInChildren<TextMeshPro>().text = name[idx];
-            player.transform.Find("Money").GetComponentInChildren<TextMeshPro>().text = money[idx].ToString();
-
+            //player.GetComponentInChildren<TextMeshProUGUI>().text = name[idx];
+            player.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name[idx];
+            player.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = name[idx];
+            //player.GetComponentInChildren<TextMeshProUGUI>().text = money[idx].ToString();
             idx++;
         }
     }
