@@ -32,13 +32,12 @@ public class UiManager : MonoSingleton<UiManager>
     {
         int idx = 0;
 
-        foreach(GameObject player in playerUI)
+        foreach (GameObject player in playerUI)
         {
-            player.GetComponentInChildren<Image>().sprite = img[idx];
-            //player.GetComponentInChildren<TextMeshProUGUI>().text = name[idx];
+            player.transform.GetChild(0).GetComponent<Image>().sprite = img[idx];
             player.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name[idx];
-            player.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = name[idx];
-            //player.GetComponentInChildren<TextMeshProUGUI>().text = money[idx].ToString();
+            player.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = money[idx].ToString();
+
             idx++;
         }
     }

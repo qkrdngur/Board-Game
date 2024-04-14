@@ -30,6 +30,7 @@ public class ResetValue : GameComponent
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
         {
             manager.curBlock[(PlayTurn)i] = 0;
+            manager.playerSO.Money[i] = initPrice;
             manager.money[(PlayTurn)i] = initPrice;
         }
 

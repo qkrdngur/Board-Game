@@ -23,13 +23,15 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
 
-
     public Dictionary<int, int> buildingPrice = new Dictionary<int, int>();
     public Dictionary<int, int> built = new Dictionary<int, int>();
+
     private readonly List<IGameComponent> _components = new();
 
     public readonly int GRADE = 12;
     public int jumpCount;
+
+    private bool _buyBuilding = false;
 
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
         _components.Add(new Dice(this));
         _components.Add(new Select(this));
         _components.Add(new Build(this));
+        _components.Add(new GameTurn(this));
         _components.Add(new ResetValue(this));
     }
 
@@ -76,7 +79,8 @@ public class GameManager : MonoSingleton<GameManager>
         BuildTower();
         CalcPrice(true);
 
-        BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
+        if (_buyBuilding)
+            BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
     }
 
     private void BuildTower()
@@ -107,13 +111,15 @@ public class GameManager : MonoSingleton<GameManager>
             PlayTurn curTurn = (PlayTurn)i;
 
             int price = buildingPrice[curBlock[pTurn]];
-            price *= (int)tower;
+            price *= (int)buildCount[curBlock[pTurn]];
 
             if (price == 0 || (pTurn == curTurn)) continue;
 
             if (BuildingOwner[curBlock[pTurn]] == PlayMoney.None)
             {
+                _buyBuilding = true;
                 money[pTurn] -= price;
+
                 break;
             }
             else
@@ -125,8 +131,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (BuildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
 
+        _buyBuilding = false; // 건물을 구매하지 않았을 때
+
         if (built[curBlock[pTurn]] != 0 && value)
+        {
+            _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
+        }    
 
         money[pTurn] -= price;
         print(money[pTurn]);
