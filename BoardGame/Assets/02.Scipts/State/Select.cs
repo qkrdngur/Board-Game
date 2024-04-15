@@ -16,7 +16,7 @@ public class Select : GameComponent
     {
         if ((manager.curBlock[manager.pTurn]) % 10 == 0) StateMain();
 
-        PayMoney();
+        //PayMoney();
 
         UiManager.Instance.ShowUI();
         UiManager.Instance.UndoImg();

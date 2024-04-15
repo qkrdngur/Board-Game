@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
   - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
   Name:
-  - ssss
-  - aaaa
-  - cccc
-  - cccc
-  Money: 
+  - player1
+  - player2
+  - player3
+  - player4
+  Money: a80c0000280a0000b80b0000b80b0000

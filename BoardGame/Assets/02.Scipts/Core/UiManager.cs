@@ -11,6 +11,7 @@ public class UiManager : MonoSingleton<UiManager>
     GameManager manager;
 
     [SerializeField] private RectTransform buildUi;
+    [SerializeField] private GameObject chooseBtn;
     [SerializeField] private GameObject[] towerImg;
 
     public bool isSpin { get; set; } = false;
@@ -21,6 +22,7 @@ public class UiManager : MonoSingleton<UiManager>
     public GameObject DiceGage;
 
     private int towerNum;
+    private CurTower saveTower = CurTower.none;
 
     private void Awake()
     {
@@ -54,10 +56,17 @@ public class UiManager : MonoSingleton<UiManager>
             towerImg[i].gameObject.SetActive(false);
     }
 
+    public void ChooseActive(bool value)
+    {
+        chooseBtn.SetActive(value);
+    }
+
     #region UIDotWeen
     public void ShowUI()
     {
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
+
+        saveTower = manager.tower;
     }
 
     public void UndoUI()
@@ -80,7 +89,12 @@ public class UiManager : MonoSingleton<UiManager>
         towerNum = value;
 
         manager.tower = (CurTower)towerNum;
-        print(manager.tower);
+    }
+
+    public void Cancel()
+    {
+        manager.tower = saveTower;
+        print(manager.tower);   
     }
     #endregion
 }
