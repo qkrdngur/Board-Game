@@ -16,20 +16,22 @@ public class GameManager : MonoSingleton<GameManager>
     public BlockName blockSO;
     public PlayerSO playerSO;
 
-    public List<GameObject> building;
-    public Dictionary<PlayTurn, GameObject> player = new Dictionary<PlayTurn, GameObject>();
-    public Dictionary<int, PlayMoney> BuildingOwner = new Dictionary<int, PlayMoney>();
-    public Dictionary<int, CurTower> buildCount = new Dictionary<int, CurTower>();
-    public Dictionary<PlayTurn, int> curBlock = new Dictionary<PlayTurn, int>();
-    public Dictionary<PlayTurn, int> money = new Dictionary<PlayTurn, int>();
+    [SerializeField] private List<Material> materials;
 
-    public Dictionary<int, int> buildingPrice = new Dictionary<int, int>();
-    public Dictionary<int, int> built = new Dictionary<int, int>();
+    public Dictionary<PlayTurn, GameObject> player        { get; set; } = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<int, PlayMoney> BuildingOwner       { get; set; } = new Dictionary<int, PlayMoney>();
+    public Dictionary<int, CurTower> buildCount           { get; set; } = new Dictionary<int, CurTower>();
+    public Dictionary<int, List<GameObject>> curTower     { get; set; } = new Dictionary<int, List<GameObject>>();
+    public Dictionary<PlayTurn, int> curBlock             { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<PlayTurn, int> money                { get; set; } = new Dictionary<PlayTurn, int>();
+
+    public Dictionary<int, int> buildingPrice             { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, int> built                     { get; set; } = new Dictionary<int, int>();
 
     private readonly List<IGameComponent> _components = new();
 
     public readonly int GRADE = 12;
-    public int jumpCount;
+    public int jumpCount { get; set; }
 
     private bool _buyBuilding = false;
 
@@ -78,18 +80,33 @@ public class GameManager : MonoSingleton<GameManager>
 
         BuildTower();
         CalcPrice(true);
+        BuyBuilding();
+    }
 
+    private void BuyBuilding()
+    {
         if (_buyBuilding)
+        {
             BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
+
+            print(BuildingOwner[curBlock[pTurn]]);
+        }
     }
 
     private void BuildTower()
     {
         for (int i = 0; i < (int)tower; i++)
         {
-            if (i < (built[curBlock[pTurn]])) continue;
+            if (i < built[curBlock[pTurn]])
+            {
+                curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+                continue;
+            }
 
             GameObject obj = ObjectPool.instance.GetObject(PoolObjectType.Build1 + i);
+            curTower[curBlock[pTurn]].Add(obj);
+
+            obj.GetComponent<MeshRenderer>().material = materials[(int)pTurn];
             obj.transform.position = BuildingPos(i).position;
         }
 
@@ -135,9 +152,9 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (built[curBlock[pTurn]] != 0 && value)
         {
-            _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
+            //_buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
-        }    
+        }
 
         money[pTurn] -= price;
         print(money[pTurn]);

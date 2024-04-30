@@ -23,13 +23,6 @@ public class PlayerMovement : GameComponent
 
     public PlayerMovement(GameManager game) : base(game)
     {
-
-    }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-
         manager = GameManager.Instance;
     }
 
@@ -38,6 +31,8 @@ public class PlayerMovement : GameComponent
         if (player != null) return;
 
         base.OnSetting();
+
+        UiManager.Instance.playerUIActive(true);
 
         //나중에 ui로 게임 플레이 인원 정하여 인원만큼 for문 돌수있게
         for (int i = 0; i < 4; i++)

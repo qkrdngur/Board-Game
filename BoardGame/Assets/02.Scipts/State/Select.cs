@@ -6,20 +6,29 @@ using BoardGame.Util;
 public class Select : GameComponent
 {
     GameManager manager;
+    UiManager uiManager;
 
     public Select(GameManager game) : base(game)
     {
         manager = GameManager.Instance;
+        uiManager = UiManager.Instance;
     }
 
     protected override void OnSelect()
     {
-        if ((manager.curBlock[manager.pTurn]) % 10 == 0) StateMain();
+        if (manager.curBlock[manager.pTurn] % 10 == 0) StateMain();
+        else
+        {
+            if (manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.tower03)
+                uiManager.ChooseActive(false);
+            else
+                uiManager.ChooseActive(true);
 
+            uiManager.ShowUI();
+            uiManager.UndoImg();
+        }
         //PayMoney();
 
-        UiManager.Instance.ShowUI();
-        UiManager.Instance.UndoImg();
     }
 
     private void PayMoney()

@@ -10,19 +10,23 @@ public class UiManager : MonoSingleton<UiManager>
     DiceGague dice;
     GameManager manager;
 
-    [SerializeField] private RectTransform buildUi;
-    [SerializeField] private GameObject chooseBtn;
+    [SerializeField] private List<GameObject> playerUI;
     [SerializeField] private GameObject[] towerImg;
+    [SerializeField] private GameObject playerInfoUI;
+    [SerializeField] private GameObject chooseBtn;
+    [SerializeField] private GameObject DiceGage;
+    [SerializeField] private RectTransform buildUi;
+    [SerializeField] private TextMeshProUGUI btnNameText;
 
     public bool isSpin { get; set; } = false;
     public float grade { get; private set; }
 
-    public List<GameObject> playerUI;
+    [Space(20)]
     public Transform dicePoint;
-    public GameObject DiceGage;
 
     private int towerNum;
     private CurTower saveTower = CurTower.none;
+    private string[] btnName = { "Cancel", "Pay" };
 
     private void Awake()
     {
@@ -43,11 +47,9 @@ public class UiManager : MonoSingleton<UiManager>
             idx++;
         }
     }
-
     public void UndoImg() //타워 건설 버튼
     {
-        int objNum =
-            (int)manager.buildCount[manager.curBlock[manager.pTurn]];
+        int objNum = (int)manager.buildCount[manager.curBlock[manager.pTurn]];
 
         for (int i = 0; i < towerImg.Length; i++)
             towerImg[i].gameObject.SetActive(true);
@@ -56,9 +58,14 @@ public class UiManager : MonoSingleton<UiManager>
             towerImg[i].gameObject.SetActive(false);
     }
 
+    public void DiceActive(bool value) => DiceGage.SetActive(value);
+    public void playerUIActive(bool value) => playerInfoUI.SetActive(value);
     public void ChooseActive(bool value)
     {
         chooseBtn.SetActive(value);
+
+        string name = value ? btnName[0] : btnName[1];
+        btnNameText.text = name;
     }
 
     #region UIDotWeen
@@ -94,7 +101,7 @@ public class UiManager : MonoSingleton<UiManager>
     public void Cancel()
     {
         manager.tower = saveTower;
-        print(manager.tower);   
+        print(manager.tower);
     }
     #endregion
 }

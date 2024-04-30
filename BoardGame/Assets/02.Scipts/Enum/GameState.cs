@@ -6,7 +6,6 @@ namespace BoardGame.Util
         Setting,
         Dice,
         Move,
-        TakeOver,
         Select,
         Build,
         Main,

@@ -19,13 +19,11 @@ public class Dice : GameComponent
     private float jumpPower;
     private float rotPower;
 
-    private int saveCnt = 0;
-
     public Dice(GameManager game) : base(game) { }
 
     protected override void OnRunning()
     {
-        UiManager.Instance.DiceGage.SetActive(true);
+        UiManager.Instance.DiceActive(true);
 
         if (Red != null || White != null) return;
 
@@ -48,9 +46,6 @@ public class Dice : GameComponent
     protected override void OnUpdate()
     {
         base.OnUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-            saveCnt = 8;
 
         if (UiManager.Instance.isSpin)
             DiceAnim();
@@ -89,7 +84,7 @@ public class Dice : GameComponent
 
         diceChildList.Add(children);
     }
-#endregion
+    #endregion
 
     #region DICE
     private void DiceAnim()
@@ -152,21 +147,19 @@ public class Dice : GameComponent
             float highY = float.MinValue;
             int save = 0;
 
-            if (saveCnt == 0)
-                foreach (var item in list)
+            foreach (var item in list)
+            {
+                if (highY < item.position.y)
                 {
-                    if (highY < item.position.y)
-                    {
-                        highY = item.position.y;
-                        int.TryParse(item.name, out save);
-                    }
+                    highY = item.position.y;
+                    int.TryParse(item.name, out save);
                 }
+            }
 
-            count += saveCnt;
-            saveCnt = 0;
+            count += save;
         }
 
-        UiManager.Instance.DiceGage.SetActive(false);
+        UiManager.Instance.DiceActive(false);
 
         GameManager.Instance.jumpCount = count;
         GameManager.Instance.UpdateState(GameState.Move);

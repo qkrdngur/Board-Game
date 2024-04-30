@@ -20,13 +20,6 @@ public class Build : GameComponent
         manager = GameManager.Instance;
     }
 
-    protected override void OnTakeOver() // 스크립트 따로 빼기
-    {
-        manager.CalcPrice(false);
-
-        manager.BuildingOwner[manager.curBlock[manager.pTurn]] = (PlayMoney)manager.pTurn;
-    }
-
     protected override void OnBuild()
     {
         if (Return()) return;

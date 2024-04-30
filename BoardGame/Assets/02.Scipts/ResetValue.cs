@@ -25,6 +25,7 @@ public class ResetValue : GameComponent
             manager.buildingPrice[i] = manager.blockSO.BuildPrice[i];
             manager.BuildingOwner[i] = PlayMoney.None;
             manager.buildCount[i] = 0;
+            manager.curTower[i] = new List<GameObject>();
         }
 
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)

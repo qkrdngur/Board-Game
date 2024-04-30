@@ -289,19 +289,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846b5061158d29341a076dd2f478c131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildUi: {fileID: 1806884033}
-  chooseBtn: {fileID: 962806573}
-  towerImg:
-  - {fileID: 1561866222}
-  - {fileID: 1258573963}
-  - {fileID: 745977531}
   playerUI:
   - {fileID: 306929000}
   - {fileID: 2035238747}
   - {fileID: 1403185522}
   - {fileID: 1849063510}
+  towerImg:
+  - {fileID: 1561866222}
+  - {fileID: 1258573963}
+  - {fileID: 745977531}
+  playerInfoUI: {fileID: 593193853}
+  chooseBtn: {fileID: 962806573}
+  DiceGage: {fileID: 1350632652}
+  buildUi: {fileID: 1806884033}
+  btnNameText: {fileID: 1881863053}
   dicePoint: {fileID: 2009290515}
-  DiceGage: {fileID: 710768028}
 --- !u!4 &93665415
 Transform:
   m_ObjectHideFlags: 0
@@ -1278,7 +1280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &593193854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2386,7 +2388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.91901326, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3577,7 +3579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350632653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4401,11 +4403,11 @@ MonoBehaviour:
   State: 0
   blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
   playerSO: {fileID: 11400000, guid: d1fd4d92dd0a41842a6fd568c64867fa, type: 2}
-  building:
-  - {fileID: 1401316562394359041, guid: 730ed5657f0709248b3c5525bfc06085, type: 3}
-  - {fileID: 3420029994855067288, guid: 2dd0f405b78f4774ebd9146b735f5465, type: 3}
-  - {fileID: 456956771579620869, guid: de110a083e66fce4cb9e87b165d1d58e, type: 3}
-  jumpCount: 0
+  materials:
+  - {fileID: 2100000, guid: e4f946a24c5b05045aab5cc6f61ff554, type: 2}
+  - {fileID: 2100000, guid: c68e46dda7fdd3247b86d75bff249443, type: 2}
+  - {fileID: 2100000, guid: 781ac4201a76b054cb685b75f073d548, type: 2}
+  - {fileID: 2100000, guid: 1a168a57f228a954c8829390e61bcb0f, type: 2}
 --- !u!114 &1479671696
 MonoBehaviour:
   m_ObjectHideFlags: 0
