@@ -101,7 +101,8 @@ public class UiManager : MonoSingleton<UiManager>
     public void Cancel()
     {
         manager.tower = saveTower;
-        print(manager.tower);
+
+        GameManager.Instance.isChangeColor = false;
     }
     #endregion
 }

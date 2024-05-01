@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [HideInInspector] public List<Transform> blockPos;
-    [HideInInspector] public List<Transform> towerPos;
-    [HideInInspector] public List<PlayTurn> blockRot;
-
+    public readonly int GRADE = 12;
     public CurTower tower;
     public PlayTurn pTurn;
     public GameState State;
@@ -16,6 +13,9 @@ public class GameManager : MonoSingleton<GameManager>
     public BlockName blockSO;
     public PlayerSO playerSO;
 
+    [HideInInspector] public List<Transform> blockPos;
+    [HideInInspector] public List<Transform> towerPos;
+    [HideInInspector] public List<PlayTurn> blockRot;
     [SerializeField] private List<Material> materials;
 
     public Dictionary<PlayTurn, GameObject> player        { get; set; } = new Dictionary<PlayTurn, GameObject>();
@@ -24,15 +24,13 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<int, List<GameObject>> curTower     { get; set; } = new Dictionary<int, List<GameObject>>();
     public Dictionary<PlayTurn, int> curBlock             { get; set; } = new Dictionary<PlayTurn, int>();
     public Dictionary<PlayTurn, int> money                { get; set; } = new Dictionary<PlayTurn, int>();
-
     public Dictionary<int, int> buildingPrice             { get; set; } = new Dictionary<int, int>();
     public Dictionary<int, int> built                     { get; set; } = new Dictionary<int, int>();
 
-    private readonly List<IGameComponent> _components = new();
-
-    public readonly int GRADE = 12;
     public int jumpCount { get; set; }
+    public bool isChangeColor;
 
+    private readonly List<IGameComponent> _components = new();
     private bool _buyBuilding = false;
 
     private void Awake()
@@ -78,8 +76,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         buildCount[curBlock[pTurn]] = tower;
 
+        CalcPrice();
         BuildTower();
-        CalcPrice(true);
         BuyBuilding();
     }
 
@@ -89,6 +87,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
 
+            _buyBuilding = false; // 건물을 구매하지 않았을 때
             print(BuildingOwner[curBlock[pTurn]]);
         }
     }
@@ -99,7 +98,9 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (i < built[curBlock[pTurn]])
             {
-                curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+                if(isChangeColor)
+                  curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+
                 continue;
             }
 
@@ -110,6 +111,7 @@ public class GameManager : MonoSingleton<GameManager>
             obj.transform.position = BuildingPos(i).position;
         }
 
+        isChangeColor = true;
         built[curBlock[pTurn]] = (int)buildCount[curBlock[pTurn]];
     }
 
@@ -121,38 +123,39 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
 
     #region Price
-    public void CalcPrice(bool value)
+    public void CalcPrice()
     {
         for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
         {
             PlayTurn curTurn = (PlayTurn)i;
 
             int price = buildingPrice[curBlock[pTurn]];
-            price *= (int)buildCount[curBlock[pTurn]];
+            int payPrice = price * (int)buildCount[curBlock[pTurn]];
 
-            if (price == 0 || (pTurn == curTurn)) continue;
+            if (payPrice == 0 || (pTurn == curTurn)) continue;
 
             if (BuildingOwner[curBlock[pTurn]] == PlayMoney.None)
             {
                 _buyBuilding = true;
-                money[pTurn] -= price;
+                money[pTurn] -= payPrice;
 
                 break;
             }
             else
-                DicMoney(curTurn, price, value);
+            {
+                payPrice = price * built[curBlock[pTurn]];
+                DicMoney(curTurn, payPrice);
+            }
         }
     }
 
-    public void DicMoney(PlayTurn turn, int price, bool value)
+    public void DicMoney(PlayTurn turn, int price)
     {
         if (BuildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
 
-        _buyBuilding = false; // 건물을 구매하지 않았을 때
-
-        if (built[curBlock[pTurn]] != 0 && value)
+        if (built[curBlock[pTurn]] != 0)
         {
-            //_buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
+            _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }
 

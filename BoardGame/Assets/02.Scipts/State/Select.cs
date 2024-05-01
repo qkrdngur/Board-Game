@@ -37,7 +37,7 @@ public class Select : GameComponent
         price *= (int)manager.tower;
 
         for (int i = 0; i < 4; i++)
-            manager.DicMoney((PlayTurn)i, price, true);
+            manager.DicMoney((PlayTurn)i, price);
     }
 
     private void StateMain()
