@@ -1,5 +1,6 @@
 using BoardGame.Util;
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,9 @@ public class Dice : GameComponent
     protected override void OnRunning()
     {
         UiManager.Instance.DiceActive(true);
+
+        if (GameManager.Instance.pTurn != PlayTurn.player)
+            UiManager.Instance.AiPlayerRoutine();
 
         if (Red != null || White != null) return;
 

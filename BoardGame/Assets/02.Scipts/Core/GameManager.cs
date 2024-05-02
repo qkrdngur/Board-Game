@@ -66,6 +66,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void NextTurn(PlayTurn turn)
     {
+        UiManager.Instance.EnableOutLine(turn);
         int next = (int)++turn % 4;
 
         pTurn = (PlayTurn)next;
@@ -130,7 +131,7 @@ public class GameManager : MonoSingleton<GameManager>
             PlayTurn curTurn = (PlayTurn)i;
 
             int price = buildingPrice[curBlock[pTurn]];
-            int payPrice = price * (int)buildCount[curBlock[pTurn]];
+            int payPrice = price * (int)tower;
 
             if (payPrice == 0 || (pTurn == curTurn)) continue;
 
@@ -143,7 +144,6 @@ public class GameManager : MonoSingleton<GameManager>
             }
             else
             {
-                payPrice = price * built[curBlock[pTurn]];
                 DicMoney(curTurn, payPrice);
             }
         }

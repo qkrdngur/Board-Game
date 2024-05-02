@@ -1,5 +1,6 @@
 using BoardGame.Util;
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class UiManager : MonoSingleton<UiManager>
     DiceGague dice;
     GameManager manager;
 
-    [SerializeField] private List<GameObject> playerUI;
+    [SerializeField] private List<RectTransform> playerUI;
     [SerializeField] private GameObject[] towerImg;
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
@@ -38,7 +39,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         int idx = 0;
 
-        foreach (GameObject player in playerUI)
+        foreach (RectTransform player in playerUI)
         {
             player.transform.GetChild(0).GetComponent<Image>().sprite = img[idx];
             player.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name[idx];
@@ -57,9 +58,22 @@ public class UiManager : MonoSingleton<UiManager>
         for (int i = 0; i < objNum; i++)
             towerImg[i].gameObject.SetActive(false);
     }
+    public void AiPlayerRoutine()
+    {
+        DiceActive(false);
+        StartCoroutine(WaitingDice());
+
+        IEnumerator WaitingDice()
+        {
+            yield return new WaitForSeconds(1f);
+
+            grade = dice.CaculateGrade();
+            isSpin = true;
+        }
+    }
 
     public void DiceActive(bool value) => DiceGage.SetActive(value);
-    public void playerUIActive(bool value) => playerInfoUI.SetActive(value);
+    public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
     public void ChooseActive(bool value)
     {
         chooseBtn.SetActive(value);
@@ -68,18 +82,36 @@ public class UiManager : MonoSingleton<UiManager>
         btnNameText.text = name;
     }
 
+    private void BuyBuilding(bool value)
+    {
+        if (value)
+        {
+            UndoUI();
+        }
+        else
+        {
+
+        }
+    }
+
     #region UIDotWeen
     public void ShowUI()
     {
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
 
-        saveTower = manager.tower;
+        saveTower = manager.buildCount[manager.curBlock[manager.pTurn]];
     }
 
     public void UndoUI()
     {
         buildUi.transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.InOutQuint)
             .OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
+    }
+
+    public void EnableOutLine(PlayTurn turn)
+    {
+        playerUI[(int)turn % 4].GetComponent<Outline>().enabled = false;
+        playerUI[((int)turn + 1) % 4].GetComponent<Outline>().enabled = true;
     }
     #endregion
 
@@ -102,6 +134,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         manager.tower = saveTower;
 
+        BuyBuilding(chooseBtn.activeSelf);
         GameManager.Instance.isChangeColor = false;
     }
     #endregion

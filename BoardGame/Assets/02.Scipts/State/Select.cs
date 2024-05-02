@@ -24,7 +24,23 @@ public class Select : GameComponent
             else
                 uiManager.ChooseActive(true);
 
-            uiManager.ShowUI();
+            if (manager.pTurn == PlayTurn.player)
+                uiManager.ShowUI();
+            else
+            {
+                int money = manager.money[manager.pTurn];
+                int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+
+                if (money >= buildMoney * 3)
+                    manager.tower = CurTower.tower03;
+                else if (money >= buildMoney * 2)
+                    manager.tower = CurTower.tower02;
+                else if (money >= buildMoney)
+                    manager.tower = CurTower.tower01;
+                //그리고 파산 신청 상황
+
+                manager.UpdateState(GameState.Build);
+            }
             uiManager.UndoImg();
         }
         //PayMoney();

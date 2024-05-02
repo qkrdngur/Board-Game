@@ -290,10 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerUI:
-  - {fileID: 306929000}
-  - {fileID: 2035238747}
-  - {fileID: 1403185522}
-  - {fileID: 1849063510}
+  - {fileID: 306929001}
+  - {fileID: 2035238748}
+  - {fileID: 1403185523}
+  - {fileID: 1849063511}
   towerImg:
   - {fileID: 1561866222}
   - {fileID: 1258573963}
@@ -334,7 +334,7 @@ MonoBehaviour:
   center: {fileID: 354477334}
   parent: {fileID: 143397870}
   gagueTrm: {fileID: 1640747911}
-  speed: 50
+  speed: 80
   visual: {fileID: 5751538521178432395}
   graduation: {fileID: 7961124445830632542, guid: fef79214c8185694bb9b8872e76fb1d6,
     type: 3}
@@ -676,6 +676,7 @@ GameObject:
   - component: {fileID: 306929001}
   - component: {fileID: 306929003}
   - component: {fileID: 306929002}
+  - component: {fileID: 306929004}
   m_Layer: 5
   m_Name: P1
   m_TagString: Untagged
@@ -744,6 +745,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306929000}
   m_CullTransparentMesh: 1
+--- !u!114 &306929004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306929000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.2867068, b: 0, a: 1}
+  m_EffectDistance: {x: 15, y: -15}
+  m_UseGraphicAlpha: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638157822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5098822, y: 2.9999993, z: 39.498764}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3748,6 +3764,7 @@ GameObject:
   - component: {fileID: 1403185523}
   - component: {fileID: 1403185525}
   - component: {fileID: 1403185524}
+  - component: {fileID: 1403185526}
   m_Layer: 5
   m_Name: P3
   m_TagString: Untagged
@@ -3816,6 +3833,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403185522}
   m_CullTransparentMesh: 1
+--- !u!114 &1403185526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403185522}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.34166265, g: 1, b: 0, a: 1}
+  m_EffectDistance: {x: 15, y: -15}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1426839194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,19 +4427,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a5f5c1ce6fc964fa337690befe91e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPos: []
-  towerPos: []
-  blockRot: 
   tower: 0
   pTurn: 0
   State: 0
   blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
   playerSO: {fileID: 11400000, guid: d1fd4d92dd0a41842a6fd568c64867fa, type: 2}
+  blockPos: []
+  towerPos: []
+  blockRot: 
   materials:
   - {fileID: 2100000, guid: e4f946a24c5b05045aab5cc6f61ff554, type: 2}
   - {fileID: 2100000, guid: c68e46dda7fdd3247b86d75bff249443, type: 2}
   - {fileID: 2100000, guid: 781ac4201a76b054cb685b75f073d548, type: 2}
   - {fileID: 2100000, guid: 1a168a57f228a954c8829390e61bcb0f, type: 2}
+  isChangeColor: 0
 --- !u!114 &1479671696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5030,6 +5063,7 @@ GameObject:
   - component: {fileID: 1849063511}
   - component: {fileID: 1849063513}
   - component: {fileID: 1849063512}
+  - component: {fileID: 1849063514}
   m_Layer: 5
   m_Name: P4
   m_TagString: Untagged
@@ -5098,6 +5132,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849063510}
   m_CullTransparentMesh: 1
+--- !u!114 &1849063514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849063510}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 15, y: -15}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1881863051
 GameObject:
   m_ObjectHideFlags: 0
@@ -5851,6 +5900,7 @@ GameObject:
   - component: {fileID: 2035238748}
   - component: {fileID: 2035238750}
   - component: {fileID: 2035238749}
+  - component: {fileID: 2035238751}
   m_Layer: 5
   m_Name: P2
   m_TagString: Untagged
@@ -5919,6 +5969,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035238747}
   m_CullTransparentMesh: 1
+--- !u!114 &2035238751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035238747}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.2720232, b: 1, a: 1}
+  m_EffectDistance: {x: 15, y: -15}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2065198806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6005,7 +6070,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 93665414}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: UndoUI
+        m_MethodName: Cancel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6017,7 +6082,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 93665414}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: Cancel
+        m_MethodName: UndoUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
