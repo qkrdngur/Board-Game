@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BoardGame.Util;
+using System;
 
 public class ResetValue : GameComponent
 {
@@ -28,11 +29,11 @@ public class ResetValue : GameComponent
             manager.curTower[i] = new List<GameObject>();
         }
 
-        for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
+        foreach (PlayTurn play in Enum.GetValues(typeof(PlayTurn)))
         {
-            manager.curBlock[(PlayTurn)i] = 0;
-            manager.playerSO.Money[i] = initPrice;
-            manager.money[(PlayTurn)i] = initPrice;
+            manager.curBlock[play] = 0;
+            manager.playerSO.Money[(int)play] = initPrice;
+            manager.money[play] = initPrice;
         }
 
         UiManager.Instance.PlayerUISetUp(manager.playerSO.Img, manager.playerSO.Name, manager.playerSO.Money);

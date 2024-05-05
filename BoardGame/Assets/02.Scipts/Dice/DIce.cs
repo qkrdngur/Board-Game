@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Dice : GameComponent
 {
+    GameManager manager;
+    UiManager uiManager;
+
     private List<List<Transform>> diceChildList = new List<List<Transform>>();
 
     private GameObject White = null;
@@ -15,19 +18,23 @@ public class Dice : GameComponent
 
     private float jumpDuration = 1f;
     private float rotDuration = 1f;
-    private float jumpValue = 5f;
+    private float jumpValue = 10f;
     private float rotValue = 600;
     private float jumpPower;
     private float rotPower;
 
-    public Dice(GameManager game) : base(game) { }
+    public Dice(GameManager game) : base(game) 
+    {
+        manager = GameManager.Instance;
+        uiManager = UiManager.Instance;
+    }
 
     protected override void OnRunning()
     {
-        UiManager.Instance.DiceActive(true);
+        uiManager.DiceActive(true);
 
-        if (GameManager.Instance.pTurn != PlayTurn.player)
-            UiManager.Instance.AiPlayerRoutine();
+        if (manager.pTurn != PlayTurn.player)
+            uiManager.AiPlayerRoutine();
 
         if (Red != null || White != null) return;
 
@@ -51,7 +58,7 @@ public class Dice : GameComponent
     {
         base.OnUpdate();
 
-        if (UiManager.Instance.isSpin)
+        if (uiManager.isSpin)
             DiceAnim();
     }
 
@@ -60,8 +67,8 @@ public class Dice : GameComponent
     {
         diceChildList.Clear();
 
-        Red.transform.position = UiManager.Instance.dicePoint.position - new Vector3(-3, 0, 0);
-        White.transform.position = UiManager.Instance.dicePoint.position - new Vector3(3, 0, 0);
+        Red.transform.position = UiManager.Instance.dicePoint.position - new Vector3(-3, 0, 3);
+        White.transform.position = UiManager.Instance.dicePoint.position - new Vector3(3, 0, -3);
     }
 
     private void CreateDice()
@@ -105,13 +112,13 @@ public class Dice : GameComponent
         rotValue = value;
 
         float rPower = rotValue / 2;
-        float jPower = jumpValue - 1;
+        float jPower = jumpValue - 3;
 
-        float saveRot = rPower / GameManager.Instance.GRADE;
-        float saveJump = jPower / GameManager.Instance.GRADE;
+        float saveRot = rPower / manager.GRADE;
+        float saveJump = jPower / manager.GRADE;
 
-        rotPower = rPower + saveRot * UiManager.Instance.grade;
-        jumpPower = 1 + saveJump * UiManager.Instance.grade;
+        rotPower = rPower + saveRot * uiManager.grade;
+        jumpPower = 3 + saveJump * uiManager.grade;
     }
 
     private void ThrowDice(GameObject[] dice, float[] value)
@@ -127,7 +134,7 @@ public class Dice : GameComponent
 
         seq1.AppendInterval(2f).OnComplete(() => DiceCount());
 
-        UiManager.Instance.isSpin = false;
+        uiManager.isSpin = false;
     }
 
     private void DotAnim(Transform diceTrm, Sequence seq)
@@ -163,10 +170,10 @@ public class Dice : GameComponent
             count += save;
         }
 
-        UiManager.Instance.DiceActive(false);
+        uiManager.DiceActive(false);
 
-        GameManager.Instance.jumpCount = count;
-        GameManager.Instance.UpdateState(GameState.Move);
+        manager.jumpCount = count;
+        manager.UpdateState(GameState.Move);
     }
     #endregion
 }

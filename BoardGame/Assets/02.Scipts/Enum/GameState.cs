@@ -4,11 +4,11 @@ namespace BoardGame.Util
     {
         Init,
         Setting,
+        Main,
         Dice,
         Move,
         Select,
         Build,
-        Main,
         Over
     }
 }

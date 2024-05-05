@@ -1,4 +1,5 @@
 using BoardGame.Util;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -126,9 +127,9 @@ public class GameManager : MonoSingleton<GameManager>
     #region Price
     public void CalcPrice()
     {
-        for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
+        foreach (PlayTurn play in Enum.GetValues(typeof(PlayTurn)))
         {
-            PlayTurn curTurn = (PlayTurn)i;
+            PlayTurn curTurn = play;
 
             int price = buildingPrice[curBlock[pTurn]];
             int payPrice = price * (int)tower;

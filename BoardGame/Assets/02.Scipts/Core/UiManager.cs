@@ -16,7 +16,6 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
     [SerializeField] private GameObject DiceGage;
-    [SerializeField] private GameObject introUI;
     [SerializeField] private RectTransform buildUi;
     [SerializeField] private TextMeshProUGUI btnNameText;
 
@@ -118,10 +117,10 @@ public class UiManager : MonoSingleton<UiManager>
 
     #region Button
 
-    public void StartBtn()
+    public void StartBtn(int num)
     {
-        GameManager.Instance.UpdateState(GameState.Main);
-        introUI.SetActive(false);
+        GameState state = (GameState)num;
+        GameManager.Instance.UpdateState(state);//Setting으로 바꾸기
     }
 
     public void OnBtn()

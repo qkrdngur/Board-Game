@@ -1,4 +1,5 @@
 using BoardGame.Util;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -36,9 +37,9 @@ public class Build : GameComponent
 
     private bool Return()
     {
-        for (int i = 0; i <= (int)PlayTurn.TirAi; i++)
+        foreach (PlayTurn play in Enum.GetValues(typeof(PlayTurn)))
         {
-            if (manager.curBlock[(PlayTurn)i] % 10 == 0 && manager.pTurn == (PlayTurn)i)
+            if (manager.curBlock[play] % 10 == 0 && manager.pTurn == play)
             {
                 StateMain();
 
