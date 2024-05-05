@@ -16,6 +16,7 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
     [SerializeField] private GameObject DiceGage;
+    [SerializeField] private GameObject introUI;
     [SerializeField] private RectTransform buildUi;
     [SerializeField] private TextMeshProUGUI btnNameText;
 
@@ -116,6 +117,13 @@ public class UiManager : MonoSingleton<UiManager>
     #endregion
 
     #region Button
+
+    public void StartBtn()
+    {
+        GameManager.Instance.UpdateState(GameState.Main);
+        introUI.SetActive(false);
+    }
+
     public void OnBtn()
     {
         grade = dice.CaculateGrade();

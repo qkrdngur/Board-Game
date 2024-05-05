@@ -301,6 +301,7 @@ MonoBehaviour:
   playerInfoUI: {fileID: 593193853}
   chooseBtn: {fileID: 962806573}
   DiceGage: {fileID: 1350632652}
+  introUI: {fileID: 1520090392}
   buildUi: {fileID: 1806884033}
   btnNameText: {fileID: 1881863053}
   dicePoint: {fileID: 2009290515}
@@ -1389,7 +1390,7 @@ Transform:
   m_Children:
   - {fileID: 782587710}
   - {fileID: 710768032}
-  - {fileID: 1146726073}
+  - {fileID: 681713237}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1406,7 +1407,7 @@ GameObject:
   - component: {fileID: 681713239}
   - component: {fileID: 681713238}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SceneCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1425,8 +1426,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1520090393}
-  m_Father: {fileID: 1146726073}
-  m_RootOrder: 0
+  m_Father: {fileID: 638157823}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2566,7 +2567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 1500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &904197927
@@ -2589,7 +2590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Intro \uC774\uB984 \uC801\uAE30"
+  m_text: Board<size=230> <color=#FF3355>G<color=#00A1FF>a<color=#4AEB57>m<color=#202020>e
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 44da52f760730114297bfdbf9039040e, type: 2}
   m_sharedMaterial: {fileID: -7943206879428855250, guid: 44da52f760730114297bfdbf9039040e,
@@ -2623,7 +2624,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3080,8 +3081,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1479671696}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
+      - m_Target: {fileID: 93665414}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
         m_MethodName: StartBtn
         m_Mode: 1
         m_Arguments:
@@ -3142,38 +3143,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070796501}
   m_CullTransparentMesh: 1
---- !u!1 &1146726072
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1146726073}
-  m_Layer: 0
-  m_Name: Scene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1146726073
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146726072}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 681713237}
-  m_Father: {fileID: 638157823}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1195107658
 GameObject:
   m_ObjectHideFlags: 0
@@ -4662,7 +4631,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1479671694}
   - component: {fileID: 1479671695}
-  - component: {fileID: 1479671696}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4711,18 +4679,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 781ac4201a76b054cb685b75f073d548, type: 2}
   - {fileID: 2100000, guid: 1a168a57f228a954c8829390e61bcb0f, type: 2}
   isChangeColor: 0
---- !u!114 &1479671696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479671693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ba4cfde394b7f343ba21dcd5fb13d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1520090392
 GameObject:
   m_ObjectHideFlags: 0
