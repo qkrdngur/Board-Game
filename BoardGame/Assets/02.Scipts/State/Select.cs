@@ -19,7 +19,7 @@ public class Select : GameComponent
         if (manager.curBlock[manager.pTurn] % 10 == 0) StateMain();
         else
         {
-            if (manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.tower03)
+            if (manager.buildCount[manager.curBlock[manager.pTurn]] != CurTower.none)
                 uiManager.ChooseActive(false);
             else
                 uiManager.ChooseActive(true);
@@ -41,7 +41,9 @@ public class Select : GameComponent
 
                 manager.UpdateState(GameState.Build);
             }
+
             uiManager.UndoImg();
+            manager.isChangeColor = false;
         }
         //PayMoney();
 

@@ -15,15 +15,16 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private GameObject[] towerImg;
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
+    [SerializeField] private GameObject payBtn;
     [SerializeField] private GameObject DiceGage;
     [SerializeField] private RectTransform buildUi;
     [SerializeField] private TextMeshProUGUI btnNameText;
 
-    public bool isSpin { get; set; } = false;
-    public float grade { get; private set; }
-
     [Space(20)]
     public Transform dicePoint;
+
+    public bool isSpin { get; set; } = false;
+    public float grade { get; private set; }
 
     private int towerNum;
     private CurTower saveTower = CurTower.none;
@@ -90,7 +91,13 @@ public class UiManager : MonoSingleton<UiManager>
         }
         else
         {
+            payBtn.GetComponent<Button>().onClick.Invoke();
+            payBtn.SetActive(true);
 
+            void PayMoney()
+            {
+
+            }
         }
     }
 
@@ -142,7 +149,6 @@ public class UiManager : MonoSingleton<UiManager>
         manager.tower = saveTower;
 
         BuyBuilding(chooseBtn.activeSelf);
-        GameManager.Instance.isChangeColor = false;
     }
     #endregion
 }
