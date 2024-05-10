@@ -23,17 +23,39 @@ public class UiManager : MonoSingleton<UiManager>
     [Space(20)]
     public Transform dicePoint;
 
+    public bool isBuyBuilding { get; private set; } = false;
     public bool isSpin { get; set; } = false;
     public float grade { get; private set; }
 
-    private int towerNum;
     private CurTower saveTower = CurTower.none;
+
+    private int towerNum;
     private string[] btnName = { "Cancel", "Pay" };
 
     private void Awake()
     {
         manager = GameManager.Instance;
         dice = GetComponent<DiceGague>();
+    }
+
+    private void BuyBuilding(bool value)
+    {
+
+        if (value)
+        {
+            isBuyBuilding = false;
+            UndoUI();
+        }
+        else
+        {
+            payBtn.GetComponent<Button>().onClick.AddListener(() => 
+            {
+                isBuyBuilding = true;
+                UndoUI();
+            });
+
+            payBtn.SetActive(true);
+        }
     }
 
     public void PlayerUISetUp(List<Sprite> img, List<string> name, List<int> money)
@@ -72,7 +94,6 @@ public class UiManager : MonoSingleton<UiManager>
             isSpin = true;
         }
     }
-
     public void DiceActive(bool value) => DiceGage.SetActive(value);
     public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
     public void ChooseActive(bool value)
@@ -81,24 +102,6 @@ public class UiManager : MonoSingleton<UiManager>
 
         string name = value ? btnName[0] : btnName[1];
         btnNameText.text = name;
-    }
-
-    private void BuyBuilding(bool value)
-    {
-        if (value)
-        {
-            UndoUI();
-        }
-        else
-        {
-            payBtn.GetComponent<Button>().onClick.Invoke();
-            payBtn.SetActive(true);
-
-            void PayMoney()
-            {
-
-            }
-        }
     }
 
     #region UIDotWeen

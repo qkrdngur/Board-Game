@@ -159,9 +159,10 @@ public class GameManager : MonoSingleton<GameManager>
             _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }
+        if (UiManager.Instance.isBuyBuilding)
+            price *= 2;
 
         money[pTurn] -= price;
-        print(money[pTurn]);
     }
     #endregion
 }
