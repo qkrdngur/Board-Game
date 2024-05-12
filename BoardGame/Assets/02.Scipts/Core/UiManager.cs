@@ -40,7 +40,6 @@ public class UiManager : MonoSingleton<UiManager>
 
     private void BuyBuilding(bool value)
     {
-
         if (value)
         {
             isBuyBuilding = false;

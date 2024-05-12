@@ -19,17 +19,17 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<PlayTurn> blockRot;
     [SerializeField] private List<Material> materials;
 
-    public Dictionary<PlayTurn, GameObject> player        { get; set; } = new Dictionary<PlayTurn, GameObject>();
-    public Dictionary<int, PlayMoney> BuildingOwner       { get; set; } = new Dictionary<int, PlayMoney>();
-    public Dictionary<int, CurTower> buildCount           { get; set; } = new Dictionary<int, CurTower>();
-    public Dictionary<int, List<GameObject>> curTower     { get; set; } = new Dictionary<int, List<GameObject>>();
-    public Dictionary<PlayTurn, int> curBlock             { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<PlayTurn, int> money                { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<int, int> buildingPrice             { get; set; } = new Dictionary<int, int>();
-    public Dictionary<int, int> built                     { get; set; } = new Dictionary<int, int>();
+    public Dictionary<PlayTurn, GameObject> player { get; set; } = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<int, PlayMoney> BuildingOwner { get; set; } = new Dictionary<int, PlayMoney>();
+    public Dictionary<int, CurTower> buildCount { get; set; } = new Dictionary<int, CurTower>();
+    public Dictionary<int, List<GameObject>> curTower { get; set; } = new Dictionary<int, List<GameObject>>();
+    public Dictionary<PlayTurn, int> curBlock { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<PlayTurn, int> money { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<int, int> buildingPrice { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, int> built { get; set; } = new Dictionary<int, int>();
 
     public int jumpCount { get; set; }
-    public bool isChangeColor;
+    public bool isChangeColor { get; set; }
 
     private readonly List<IGameComponent> _components = new();
     private bool _buyBuilding = false;
@@ -100,8 +100,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (i < built[curBlock[pTurn]])
             {
-                if(isChangeColor)
-                  curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+                if (isChangeColor)
+                    curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
 
                 continue;
             }
@@ -159,10 +159,22 @@ public class GameManager : MonoSingleton<GameManager>
             _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }
-        if (UiManager.Instance.isBuyBuilding)
+
+        if (UiManager.Instance.isBuyBuilding) // 나중에 ui로 돈들어가는 이펙트하고 이것저것 하기
+        {
             price *= 2;
+            ChangeColor();
+        }
 
         money[pTurn] -= price;
+    }
+
+    private void ChangeColor()
+    {
+        for (int i = 0; i < (int)tower; i++)
+        {
+            curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+        }
     }
     #endregion
 }
