@@ -15,6 +15,7 @@ public class UiManager : MonoSingleton<UiManager>
     [SerializeField] private GameObject[] towerImg;
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
+    [SerializeField] private GameObject cancelBtn;
     [SerializeField] private GameObject payBtn;
     [SerializeField] private GameObject DiceGage;
     [SerializeField] private RectTransform buildUi;
@@ -23,7 +24,7 @@ public class UiManager : MonoSingleton<UiManager>
     [Space(20)]
     public Transform dicePoint;
 
-    public bool isBuyBuilding { get; private set; } = false;
+    public bool isBuyBuilding { get; set; } = false;
     public bool isSpin { get; set; } = false;
     public float grade { get; private set; }
 
@@ -50,9 +51,12 @@ public class UiManager : MonoSingleton<UiManager>
             payBtn.GetComponent<Button>().onClick.AddListener(() => 
             {
                 isBuyBuilding = true;
+                payBtn.SetActive(false);
+
                 UndoUI();
             });
 
+            cancelBtn.SetActive(false);
             payBtn.SetActive(true);
         }
     }

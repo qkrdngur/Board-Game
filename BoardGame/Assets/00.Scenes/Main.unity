@@ -703,6 +703,7 @@ MonoBehaviour:
   - {fileID: 745977531}
   playerInfoUI: {fileID: 593193853}
   chooseBtn: {fileID: 962806573}
+  cancelBtn: {fileID: 2065198806}
   payBtn: {fileID: 1134068047}
   DiceGage: {fileID: 1350632652}
   buildUi: {fileID: 1806884033}
@@ -15997,7 +15998,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c68e46dda7fdd3247b86d75bff249443, type: 2}
   - {fileID: 2100000, guid: 781ac4201a76b054cb685b75f073d548, type: 2}
   - {fileID: 2100000, guid: 1a168a57f228a954c8829390e61bcb0f, type: 2}
-  isChangeColor: 0
 --- !u!1 &1485008626
 GameObject:
   m_ObjectHideFlags: 0

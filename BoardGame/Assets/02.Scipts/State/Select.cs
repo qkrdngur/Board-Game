@@ -28,16 +28,18 @@ public class Select : GameComponent
                 uiManager.ShowUI();
             else
             {
-                int money = manager.money[manager.pTurn];
+                CurTower tower = manager.buildCount[manager.curBlock[manager.pTurn]];
                 int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+                int money = manager.money[manager.pTurn];
 
-                if (money >= buildMoney * 3)
-                    manager.tower = CurTower.tower03;
-                else if (money >= buildMoney * 2)
-                    manager.tower = CurTower.tower02;
-                else if (money >= buildMoney)
-                    manager.tower = CurTower.tower01;
-                //그리고 파산 신청 상황
+                if ((int)tower * buildMoney <= money)
+                    manager.tower = tower;
+                else if((int)tower * buildMoney * 2 <= money)
+                    uiManager.isBuyBuilding = true;
+                else
+                {
+                    //그리고 파산 신청 상황
+                }
 
                 manager.UpdateState(GameState.Build);
             }

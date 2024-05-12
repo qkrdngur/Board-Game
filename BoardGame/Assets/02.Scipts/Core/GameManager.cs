@@ -19,14 +19,14 @@ public class GameManager : MonoSingleton<GameManager>
     [HideInInspector] public List<PlayTurn> blockRot;
     [SerializeField] private List<Material> materials;
 
-    public Dictionary<PlayTurn, GameObject> player { get; set; } = new Dictionary<PlayTurn, GameObject>();
-    public Dictionary<int, PlayMoney> BuildingOwner { get; set; } = new Dictionary<int, PlayMoney>();
-    public Dictionary<int, CurTower> buildCount { get; set; } = new Dictionary<int, CurTower>();
-    public Dictionary<int, List<GameObject>> curTower { get; set; } = new Dictionary<int, List<GameObject>>();
-    public Dictionary<PlayTurn, int> curBlock { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<PlayTurn, int> money { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<int, int> buildingPrice { get; set; } = new Dictionary<int, int>();
-    public Dictionary<int, int> built { get; set; } = new Dictionary<int, int>();
+    public Dictionary<PlayTurn, GameObject> player       { get; set; } = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<PlayTurn, int> curBlock            { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<PlayTurn, int> money               { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<int, PlayMoney> BuildingOwner      { get; set; } = new Dictionary<int, PlayMoney>();
+    public Dictionary<int, CurTower> buildCount          { get; set; } = new Dictionary<int, CurTower>();
+    public Dictionary<int, int> buildingPrice            { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, int> built                    { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, List<GameObject>> curTower    { get; set; } = new Dictionary<int, List<GameObject>>();
 
     public int jumpCount { get; set; }
     public bool isChangeColor { get; set; }
