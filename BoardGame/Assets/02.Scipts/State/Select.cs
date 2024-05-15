@@ -9,6 +9,11 @@ public class Select : GameComponent
     GameManager manager;
     UiManager uiManager;
 
+    CurTower curTower;
+
+    int buildMoney;
+    int money;
+
     public Select(GameManager game) : base(game)
     {
         manager = GameManager.Instance;
@@ -26,28 +31,28 @@ public class Select : GameComponent
         }
         else
         {
-            CurTower tower = manager.buildCount[manager.curBlock[manager.pTurn]];
+            //CurTower tower = manager.buildCount[manager.curBlock[manager.pTurn]];
 
-            int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
-            int money = manager.money[manager.pTurn];
+            //int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+            //int money = manager.money[manager.pTurn];
 
-            if (money >= buildMoney * 3)
-                manager.tower = CurTower.tower03;
-            else if (money >= buildMoney * 2)
-                manager.tower = CurTower.tower02;
-            else if (money >= buildMoney)
-                manager.tower = CurTower.tower01;
+            //if (money >= buildMoney * 3)
+            //    manager.tower = CurTower.tower03;
+            //else if (money >= buildMoney * 2)
+            //    manager.tower = CurTower.tower02;
+            //else if (money >= buildMoney)
+            //    manager.tower = CurTower.tower01;
 
-            if ((int)tower * buildMoney <= money)
-                manager.tower = tower;
-            else if ((int)tower * buildMoney * 2 <= money)
-                uiManager.isBuyBuilding = true;
-            else
-            {
-                //그리고 파산 신청 상황
-            }
+            //if ((int)tower * buildMoney <= money)
+            //    manager.tower = tower;
+            //else if ((int)tower * buildMoney * 2 <= money)
+            //    uiManager.isBuyBuilding = true;
+            //else
+            //{
+            //    //그리고 파산 신청 상황
+            //}
 
-            manager.UpdateState(GameState.Build);
+            SelectBuild();
         }
 
         uiManager.UndoImg();
@@ -68,27 +73,60 @@ public class Select : GameComponent
     private void SelectBuild()
     {
         CurTower tower = manager.buildCount[manager.curBlock[manager.pTurn]];
-        int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
-        int money = manager.money[manager.pTurn];
 
-        if (tower != CurTower.none)
+        buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+        money = manager.money[manager.pTurn];
+
+        ExistBuilding(tower);
+        NonExistBuilding(tower);
+    }
+
+    private void ExistBuilding(CurTower tower)
+    {
+        if (tower == CurTower.none) return;
+
+        if ((int)tower * buildMoney * 2 <= money)
         {
-            if ((int)tower * buildMoney <= money)
-                manager.tower = tower;
-            else if ((int)tower * buildMoney * 2 <= money)
-                uiManager.isBuyBuilding = true;
+            manager.tower = tower;
+            uiManager.isBuyBuilding = true;
         }
+        else if ((int)tower * buildMoney <= money)
+        {
+            manager.tower = tower;
+        }
+        else
+        {
+            Bankruptcy();//파산했을 때
+        }
+
+        manager.UpdateState(GameState.Build);
+    }
+
+    private void NonExistBuilding(CurTower tower)
+    {
+        if (tower != CurTower.none) return;
 
         for (int num = Enum.GetValues(typeof(CurTower)).Length; num > 0; num--)
         {
             if ((CurTower)num == CurTower.none)
             {
-                //파산 하였을 때
+                Bankruptcy();//파산했을 때
             }
 
             if (money >= buildMoney * num)
+            {
                 manager.tower = (CurTower)num;
+                manager.UpdateState(GameState.Build);
+
+                break;
+            }
         }
+                manager.UpdateState(GameState.Build);
+    }
+
+    private void Bankruptcy()
+    {
+
     }
 
     private void UndoChoose(bool value)

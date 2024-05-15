@@ -1,23 +1,22 @@
 using BoardGame.Util;
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     public readonly int GRADE = 12;
-    public CurTower tower;
-    public PlayTurn pTurn;
-    public GameState State;
 
     public BlockName blockSO;
     public PlayerSO playerSO;
 
-    [HideInInspector] public List<Transform> blockPos;
-    [HideInInspector] public List<Transform> towerPos;
-    [HideInInspector] public List<PlayTurn> blockRot;
     [SerializeField] private List<Material> materials;
+
+    public List<Transform> blockPos;
+
+    public PlayTurn pTurn                                { get; private set; }
+    public GameState State                               { get; private set; }
+    public CurTower tower;
 
     public Dictionary<PlayTurn, GameObject> player       { get; set; } = new Dictionary<PlayTurn, GameObject>();
     public Dictionary<PlayTurn, int> curBlock            { get; set; } = new Dictionary<PlayTurn, int>();
@@ -28,8 +27,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<int, int> built                    { get; set; } = new Dictionary<int, int>();
     public Dictionary<int, List<GameObject>> curTower    { get; set; } = new Dictionary<int, List<GameObject>>();
 
-    public int jumpCount { get; set; }
-    public bool isChangeColor { get; set; }
+    public int jumpCount                                 { get; set; }
+    public bool isChangeColor                            { get; set; }
 
     private readonly List<IGameComponent> _components = new();
     private bool _buyBuilding = false;
@@ -175,6 +174,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
         }
+        Debug.Log("왜 안되는데");
     }
     #endregion
 }
