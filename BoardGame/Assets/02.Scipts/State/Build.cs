@@ -33,7 +33,6 @@ public class Build : GameComponent
     private void StateMain()
     {
         manager.NextTurn(manager.pTurn);
-        Debug.Log("되라 제발");
         manager.UpdateState(GameState.Main);
     }
 

@@ -99,6 +99,7 @@ public class Select : GameComponent
             Bankruptcy();//파산했을 때
         }
 
+        Debug.Log("건물 잇음");
         manager.UpdateState(GameState.Build);
     }
 
@@ -121,7 +122,9 @@ public class Select : GameComponent
                 break;
             }
         }
-                manager.UpdateState(GameState.Build);
+
+        Debug.Log("건물 없음");
+        manager.UpdateState(GameState.Build);
     }
 
     private void Bankruptcy()
