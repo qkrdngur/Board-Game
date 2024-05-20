@@ -14,21 +14,21 @@ public class GameManager : MonoSingleton<GameManager>
 
     public List<Transform> blockPos;
 
-    public PlayTurn pTurn                                { get; private set; }
-    public GameState State                               { get; private set; }
-    public CurTower tower;
+    public PlayTurn pTurn { get; private set; }
+    public GameState State { get; private set; }
+    public CurTower tower { get; set; }
 
-    public Dictionary<PlayTurn, GameObject> player       { get; set; } = new Dictionary<PlayTurn, GameObject>();
-    public Dictionary<PlayTurn, int> curBlock            { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<PlayTurn, int> money               { get; set; } = new Dictionary<PlayTurn, int>();
-    public Dictionary<int, PlayMoney> BuildingOwner      { get; set; } = new Dictionary<int, PlayMoney>();
-    public Dictionary<int, CurTower> buildCount          { get; set; } = new Dictionary<int, CurTower>();
-    public Dictionary<int, int> buildingPrice            { get; set; } = new Dictionary<int, int>();
-    public Dictionary<int, int> built                    { get; set; } = new Dictionary<int, int>();
-    public Dictionary<int, List<GameObject>> curTower    { get; set; } = new Dictionary<int, List<GameObject>>();
+    public Dictionary<PlayTurn, GameObject> player { get; set; } = new Dictionary<PlayTurn, GameObject>();
+    public Dictionary<PlayTurn, int> curBlock { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<PlayTurn, int> money { get; set; } = new Dictionary<PlayTurn, int>();
+    public Dictionary<int, PlayMoney> BuildingOwner { get; set; } = new Dictionary<int, PlayMoney>();
+    public Dictionary<int, CurTower> buildCount { get; set; } = new Dictionary<int, CurTower>();
+    public Dictionary<int, int> buildingPrice { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, int> built { get; set; } = new Dictionary<int, int>();
+    public Dictionary<int, List<GameObject>> curTower { get; set; } = new Dictionary<int, List<GameObject>>();
 
-    public int jumpCount                                 { get; set; }
-    public bool isChangeColor                            { get; set; }
+    public int jumpCount { get; set; }
+    public bool isChangeColor { get; set; }
 
     private readonly List<IGameComponent> _components = new();
     private bool _buyBuilding = false;
@@ -89,7 +89,6 @@ public class GameManager : MonoSingleton<GameManager>
             BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
 
             _buyBuilding = false; // 건물을 구매하지 않았을 때
-            print(BuildingOwner[curBlock[pTurn]]);
         }
     }
 
@@ -174,7 +173,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
         }
-        Debug.Log("왜 안되는데");
     }
     #endregion
 }

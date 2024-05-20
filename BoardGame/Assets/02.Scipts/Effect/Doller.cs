@@ -11,7 +11,6 @@ public class Doller : MonoBehaviour
     void Start()
     {
         Vector2 randomPosition = GetRandomPositionInCircle();
-        Debug.Log("Random Position: " + randomPosition);
     }
 
     Vector2 GetRandomPositionInCircle()

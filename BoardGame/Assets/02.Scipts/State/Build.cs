@@ -26,7 +26,6 @@ public class Build : GameComponent
         if (Return()) return;
 
         manager.Build();
-
         StateMain();
     }
 

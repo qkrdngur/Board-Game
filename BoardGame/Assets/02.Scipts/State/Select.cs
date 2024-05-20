@@ -99,7 +99,6 @@ public class Select : GameComponent
             Bankruptcy();//파산했을 때
         }
 
-        Debug.Log("건물 잇음");
         manager.UpdateState(GameState.Build);
     }
 
@@ -107,7 +106,7 @@ public class Select : GameComponent
     {
         if (tower != CurTower.none) return;
 
-        for (int num = Enum.GetValues(typeof(CurTower)).Length; num > 0; num--)
+        for (int num = Enum.GetValues(typeof(CurTower)).Length - 1; num > 0; num--)
         {
             if ((CurTower)num == CurTower.none)
             {
@@ -117,13 +116,11 @@ public class Select : GameComponent
             if (money >= buildMoney * num)
             {
                 manager.tower = (CurTower)num;
-                manager.UpdateState(GameState.Build);
 
                 break;
             }
         }
 
-        Debug.Log("건물 없음");
         manager.UpdateState(GameState.Build);
     }
 
