@@ -8,7 +8,7 @@ public class ResetValue : GameComponent
 {
     GameManager manager;
 
-    private int initPrice = 3000;
+    private int initPrice = 10;
 
     public ResetValue(GameManager game) : base(game)
     {

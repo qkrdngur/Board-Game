@@ -5,14 +5,11 @@ namespace BoardGame.Util
         block01 = 0,
         block02,
         ground,
-        Player,
-        FirAi,
-        SecAi,
-        ThiAi,
-        RedDice,
-        WhiteDice,
-        Build1,
-        Build2,
-        Build3
+        player,
+        redDice,
+        whiteDice,
+        build1,
+        build2,
+        build3
     }
 }

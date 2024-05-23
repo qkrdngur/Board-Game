@@ -37,7 +37,7 @@ public class PlayerMovement : GameComponent
         //나중에 ui로 게임 플레이 인원 정하여 인원만큼 for문 돌수있게
         for (int i = 0; i < 4; i++)
         {
-            player = ObjectPool.instance.GetObject((PoolObjectType)(i + 3));
+            player = ObjectPool.instance.GetObject(PoolObjectType.player);
             player.transform.position += pos[i];
 
             JumpNum[(PlayTurn)i] = 0;

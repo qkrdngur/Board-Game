@@ -25,8 +25,8 @@ public class UiManager : MonoSingleton<UiManager>
     public Transform dicePoint;
 
     public bool isBuyBuilding { get; set; } = false;
-    public bool isSpin { get; set; } = false;
-    public float grade { get; private set; }
+    public bool isSpin        { get; set; } = false;
+    public float grade        { get; private set; }
 
     private CurTower saveTower = CurTower.none;
 
@@ -107,9 +107,27 @@ public class UiManager : MonoSingleton<UiManager>
         btnNameText.text = name;
     }
 
+    private void SelectBuild()
+    {
+        int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+        int money = manager.money[manager.pTurn];
+
+        for (int i = 1; i <= towerImg.Length; i++)
+        {
+            if(money < buildMoney * i)
+            {
+                print("ss");
+                towerImg[i - 1].gameObject.SetActive(false);
+            }
+            else
+                towerImg[i - 1].gameObject.SetActive(true);
+        }
+    }
+
     #region UIDotWeen
     public void ShowUI()
     {
+        SelectBuild();
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
 
         saveTower = manager.buildCount[manager.curBlock[manager.pTurn]];

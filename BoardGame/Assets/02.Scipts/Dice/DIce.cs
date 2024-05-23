@@ -73,14 +73,14 @@ public class Dice : GameComponent
 
     private void CreateDice()
     {
-        Red = ObjectPool.instance.GetObject(PoolObjectType.RedDice);
-        White = ObjectPool.instance.GetObject(PoolObjectType.WhiteDice);
+        Red = ObjectPool.instance.GetObject(PoolObjectType.redDice);
+        White = ObjectPool.instance.GetObject(PoolObjectType.whiteDice);
     }
 
     private void DeleteDice()
     {
-        ObjectPool.instance.ReturnObject(PoolObjectType.WhiteDice, White);
-        ObjectPool.instance.ReturnObject(PoolObjectType.RedDice, Red);
+        ObjectPool.instance.ReturnObject(PoolObjectType.whiteDice, White);
+        ObjectPool.instance.ReturnObject(PoolObjectType.redDice, Red);
 
         White = null;
         Red = null;

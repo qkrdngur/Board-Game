@@ -15985,19 +15985,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a5f5c1ce6fc964fa337690befe91e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: 0
-  pTurn: 0
-  State: 0
   blockSO: {fileID: 11400000, guid: 74b3abfdef52b924888ce5653f7db52f, type: 2}
   playerSO: {fileID: 11400000, guid: d1fd4d92dd0a41842a6fd568c64867fa, type: 2}
-  blockPos: []
-  towerPos: []
-  blockRot: 
   materials:
   - {fileID: 2100000, guid: e4f946a24c5b05045aab5cc6f61ff554, type: 2}
   - {fileID: 2100000, guid: c68e46dda7fdd3247b86d75bff249443, type: 2}
   - {fileID: 2100000, guid: 781ac4201a76b054cb685b75f073d548, type: 2}
   - {fileID: 2100000, guid: 1a168a57f228a954c8829390e61bcb0f, type: 2}
+  blockPos: []
 --- !u!1 &1485008626
 GameObject:
   m_ObjectHideFlags: 0
@@ -20502,36 +20497,24 @@ MonoBehaviour:
     poolCount: 1
   - prefabs: {fileID: 7249710701183736043, guid: ece561fea717492478331c0589adf224,
       type: 3}
-    poolType: 7
+    poolType: 4
     poolCount: 1
   - prefabs: {fileID: 5294052667757081491, guid: 8b8d0f3c760f1144a96ad8f5fba18e58,
       type: 3}
-    poolType: 8
+    poolType: 5
     poolCount: 1
   - prefabs: {fileID: 1401316562394359041, guid: 730ed5657f0709248b3c5525bfc06085,
       type: 3}
-    poolType: 9
+    poolType: 6
     poolCount: 36
   - prefabs: {fileID: 3420029994855067288, guid: 2dd0f405b78f4774ebd9146b735f5465,
       type: 3}
-    poolType: 10
+    poolType: 7
     poolCount: 36
   - prefabs: {fileID: 456956771579620869, guid: de110a083e66fce4cb9e87b165d1d58e,
       type: 3}
-    poolType: 11
+    poolType: 8
     poolCount: 36
-  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
-      type: 3}
-    poolType: 4
-    poolCount: 1
-  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
-      type: 3}
-    poolType: 5
-    poolCount: 1
-  - prefabs: {fileID: 6361353805162627658, guid: 1a0ebb04b16004c448cdd160d94a76e3,
-      type: 3}
-    poolType: 6
-    poolCount: 1
   spawnPos: {fileID: 339682638}
 --- !u!1 &1884867718
 GameObject:

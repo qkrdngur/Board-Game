@@ -24,6 +24,9 @@ public class Select : GameComponent
     {
         StateMain();
 
+        SelectBuild();
+        uiManager.UndoImg();
+
         if (manager.pTurn == PlayTurn.player)
         {
             UndoChoose(manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none);
@@ -31,31 +34,9 @@ public class Select : GameComponent
         }
         else
         {
-            //CurTower tower = manager.buildCount[manager.curBlock[manager.pTurn]];
-
-            //int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
-            //int money = manager.money[manager.pTurn];
-
-            //if (money >= buildMoney * 3)
-            //    manager.tower = CurTower.tower03;
-            //else if (money >= buildMoney * 2)
-            //    manager.tower = CurTower.tower02;
-            //else if (money >= buildMoney)
-            //    manager.tower = CurTower.tower01;
-
-            //if ((int)tower * buildMoney <= money)
-            //    manager.tower = tower;
-            //else if ((int)tower * buildMoney * 2 <= money)
-            //    uiManager.isBuyBuilding = true;
-            //else
-            //{
-            //    //그리고 파산 신청 상황
-            //}
-
-            SelectBuild();
+            manager.UpdateState(GameState.Build);
         }
 
-        uiManager.UndoImg();
         manager.isChangeColor = false;
         //PayMoney();
 
@@ -98,8 +79,6 @@ public class Select : GameComponent
         {
             Bankruptcy();//파산했을 때
         }
-
-        manager.UpdateState(GameState.Build);
     }
 
     private void NonExistBuilding(CurTower tower)
@@ -120,13 +99,12 @@ public class Select : GameComponent
                 break;
             }
         }
-
-        manager.UpdateState(GameState.Build);
     }
 
     private void Bankruptcy()
     {
-
+        //Enum값 제거를 이용해서 만들어진 Enum변수에서 파산한 플레이어를 없엔다.
+        ObjectPool.instance.ReturnObject(PoolObjectType.player, manager.player[manager.pTurn]);
     }
 
     private void UndoChoose(bool value)
