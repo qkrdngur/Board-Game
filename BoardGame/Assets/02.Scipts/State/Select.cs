@@ -9,8 +9,6 @@ public class Select : GameComponent
     GameManager manager;
     UiManager uiManager;
 
-    CurTower curTower;
-
     int buildMoney;
     int money;
 
