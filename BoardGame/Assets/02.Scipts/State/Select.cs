@@ -66,15 +66,18 @@ public class Select : GameComponent
 
         if ((int)tower * buildMoney * 2 <= money)
         {
+            Debug.Log("1");
             manager.tower = tower;
             uiManager.isBuyBuilding = true;
         }
         else if ((int)tower * buildMoney <= money)
         {
+            Debug.Log("2");
             manager.tower = tower;
         }
         else
         {
+            Debug.Log("없다");
             Bankruptcy();//파산했을 때
         }
     }
@@ -92,6 +95,7 @@ public class Select : GameComponent
 
             if (money >= buildMoney * num)
             {
+                Debug.Log("와이 안돼");
                 manager.tower = (CurTower)num;
 
                 break;
