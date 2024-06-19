@@ -27,7 +27,11 @@ public class Select : GameComponent
 
         if (manager.pTurn == PlayTurn.player)
         {
-            UndoChoose(manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none);
+            bool isNotBuy = manager.buildingPrice[manager.curBlock[manager.pTurn]] > money;
+            bool isEmpty = manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none;
+            bool isActive = isNotBuy ? isEmpty : isNotBuy;
+
+            UndoChoose(isActive, isNotBuy);
             uiManager.ShowUI();
         }
         else
@@ -109,9 +113,9 @@ public class Select : GameComponent
         ObjectPool.instance.ReturnObject(PoolObjectType.player, manager.player[manager.pTurn]);
     }
 
-    private void UndoChoose(bool value)
+    private void UndoChoose(bool value, bool active)
     {
-        uiManager.ChooseActive(value);
+        uiManager.ChooseActive(value, active);
     }
 
     private void StateMain()

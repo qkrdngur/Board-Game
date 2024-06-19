@@ -25,8 +25,8 @@ public class UiManager : MonoSingleton<UiManager>
     public Transform dicePoint;
 
     public bool isBuyBuilding { get; set; } = false;
-    public bool isSpin        { get; set; } = false;
-    public float grade        { get; private set; }
+    public bool isSpin { get; set; } = false;
+    public float grade { get; private set; }
 
     private CurTower saveTower = CurTower.none;
 
@@ -48,7 +48,7 @@ public class UiManager : MonoSingleton<UiManager>
         }
         else
         {
-            payBtn.GetComponent<Button>().onClick.AddListener(() => 
+            payBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 isBuyBuilding = true;
                 payBtn.SetActive(false);
@@ -99,12 +99,14 @@ public class UiManager : MonoSingleton<UiManager>
     }
     public void DiceActive(bool value) => DiceGage.SetActive(value);
     public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
-    public void ChooseActive(bool value)
+    public void ChooseActive(bool value, bool active)
     {
-        chooseBtn.SetActive(value);
+        chooseBtn.SetActive(value); //¿©±â µ· ¾øÀ» ¶§ ²ô±â
 
         string name = value ? btnName[0] : btnName[1];
-        btnNameText.text = name;
+        if(active) name = btnName[0];
+
+        cancelBtn.GetComponentInChildren<TextMeshProUGUI>().text = name;
     }
 
     private void SelectBuild()
@@ -114,13 +116,7 @@ public class UiManager : MonoSingleton<UiManager>
 
         for (int i = 1; i <= towerImg.Length; i++)
         {
-            if(money < buildMoney * i)
-            {
-                print("ss");
-                towerImg[i - 1].gameObject.SetActive(false);
-            }
-            else
-                towerImg[i - 1].gameObject.SetActive(true);
+            towerImg[i - 1].gameObject.SetActive(money > buildMoney * i);
         }
     }
 
