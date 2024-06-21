@@ -106,6 +106,7 @@ public class UiManager : MonoSingleton<UiManager>
         string name = value ? btnName[0] : btnName[1];
         if(active) name = btnName[0];
 
+        cancelBtn.SetActive(true);
         cancelBtn.GetComponentInChildren<TextMeshProUGUI>().text = name;
     }
 

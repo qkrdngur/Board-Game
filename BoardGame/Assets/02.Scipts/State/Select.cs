@@ -27,7 +27,7 @@ public class Select : GameComponent
 
         if (manager.pTurn == PlayTurn.player)
         {
-            bool isNotBuy = manager.buildingPrice[manager.curBlock[manager.pTurn]] > money;
+            bool isNotBuy = manager.buildingPrice[manager.curBlock[manager.pTurn]] <= money;
             bool isEmpty = manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none;
             bool isActive = isNotBuy ? isEmpty : isNotBuy;
 
