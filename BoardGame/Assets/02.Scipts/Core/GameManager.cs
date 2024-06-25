@@ -34,7 +34,14 @@ public class GameManager : MonoSingleton<GameManager>
     private readonly List<IGameComponent> _components = new();
     private bool _buyBuilding = false;
 
-    private void Awake()
+    void FirstPlayer()
+    {
+        //여기에 처음 시작 할 플레이어 정하는거 하기(이대로하면 안됨)
+        int firstPlayer = UnityEngine.Random.Range(0, Enum.GetValues(typeof(PlayTurn)).Length);
+        pTurn = (PlayTurn)firstPlayer;
+    }
+
+    void Awake()
     {
         _components.Add(new SpawnBlock(this));
         _components.Add(new PlayerMovement(this));
@@ -90,7 +97,6 @@ public class GameManager : MonoSingleton<GameManager>
             BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
 
             _buyBuilding = false; // 건물을 구매하지 않았을 때
-            print(BuildingOwner[curBlock[pTurn]]);
         }
     }
 

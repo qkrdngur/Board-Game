@@ -9,7 +9,7 @@ public class SceneManager : GameComponent
     {
     }
 
-    protected override void OnRunning()
+    protected override void OnMain()
     {
 
     }

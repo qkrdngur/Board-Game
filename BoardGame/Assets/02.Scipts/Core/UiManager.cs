@@ -29,6 +29,7 @@ public class UiManager : MonoSingleton<UiManager>
     public float grade { get; private set; }
 
     private CurTower saveTower = CurTower.none;
+    private GameState gameState = GameState.Build;
 
     private int towerNum;
     private string[] btnName = { "Cancel", "Pay" };
@@ -44,6 +45,7 @@ public class UiManager : MonoSingleton<UiManager>
         if (value)
         {
             isBuyBuilding = false;
+
             UndoUI();
         }
         else
@@ -51,9 +53,9 @@ public class UiManager : MonoSingleton<UiManager>
             payBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 isBuyBuilding = true;
-                payBtn.SetActive(false);
 
                 UndoUI();
+                payBtn.SetActive(false);
             });
 
             cancelBtn.SetActive(false);
@@ -104,7 +106,7 @@ public class UiManager : MonoSingleton<UiManager>
         chooseBtn.SetActive(value); //¿©±â µ· ¾øÀ» ¶§ ²ô±â
 
         string name = value ? btnName[0] : btnName[1];
-        if(active) name = btnName[0];
+        if (active) name = btnName[0];
 
         cancelBtn.SetActive(true);
         cancelBtn.GetComponentInChildren<TextMeshProUGUI>().text = name;
@@ -117,7 +119,7 @@ public class UiManager : MonoSingleton<UiManager>
 
         for (int i = 1; i <= towerImg.Length; i++)
         {
-            towerImg[i - 1].gameObject.SetActive(money > buildMoney * i);
+            towerImg[i - 1].gameObject.SetActive(money >= buildMoney * i);
         }
     }
 

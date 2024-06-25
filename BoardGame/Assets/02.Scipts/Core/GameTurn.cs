@@ -12,9 +12,9 @@ public class GameTurn : GameComponent
         manager = GameManager.Instance;
     }
 
-    protected override void OnRunning()
+    protected override void OnMain()
     {
-        base.OnRunning();
+        base.OnMain();
 
         CalcMoney();
         UiManager.Instance.PlayerUISetUp(manager.playerSO.Img, manager.playerSO.Name, manager.playerSO.Money);

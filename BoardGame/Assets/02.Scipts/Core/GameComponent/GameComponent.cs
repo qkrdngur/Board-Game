@@ -20,7 +20,7 @@ namespace BoardGame.Util
                     OnSetting();
                     break;
                 case GameState.Main:
-                    OnRunning();
+                    OnMain();
                     break;
                 case GameState.Move:
                     OnMove();
@@ -41,7 +41,7 @@ namespace BoardGame.Util
 
         protected virtual void OnSetting() { }
 
-        protected virtual void OnRunning() { }
+        protected virtual void OnMain() { }
 
         protected virtual void OnUpdate() { }
 

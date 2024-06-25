@@ -25,7 +25,7 @@ public class SpawnBlock : GameComponent
 
     }
 
-    protected override void OnRunning()
+    protected override void OnMain()
     {
         if (isDone) return;
 

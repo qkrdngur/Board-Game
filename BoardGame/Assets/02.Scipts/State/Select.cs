@@ -27,11 +27,14 @@ public class Select : GameComponent
 
         if (manager.pTurn == PlayTurn.player)
         {
-            bool isNotBuy = manager.buildingPrice[manager.curBlock[manager.pTurn]] <= money;
-            bool isEmpty = manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none;
-            bool isActive = isNotBuy ? isEmpty : isNotBuy;
+            int buildingPrice = manager.buildingPrice[manager.curBlock[manager.pTurn]];
 
-            UndoChoose(isActive, isNotBuy);
+            bool isPay = buildingPrice <= money;
+            bool isBuy = buildingPrice * 2 <= money;
+            bool isEmpty = manager.buildCount[manager.curBlock[manager.pTurn]] == CurTower.none;
+            bool isActive = isPay ? isEmpty : isPay ? isBuy : isPay; //건
+
+            UndoChoose(isActive, isPay);
             uiManager.ShowUI();
         }
         else
@@ -70,13 +73,11 @@ public class Select : GameComponent
 
         if ((int)tower * buildMoney * 2 <= money)
         {
-            Debug.Log("1");
             manager.tower = tower;
             uiManager.isBuyBuilding = true;
         }
         else if ((int)tower * buildMoney <= money)
         {
-            Debug.Log("2");
             manager.tower = tower;
         }
         else
@@ -94,12 +95,12 @@ public class Select : GameComponent
         {
             if ((CurTower)num == CurTower.none)
             {
+                Debug.Log("나 파산");
                 Bankruptcy();//파산했을 때
             }
 
             if (money >= buildMoney * num)
             {
-                Debug.Log("와이 안돼");
                 manager.tower = (CurTower)num;
 
                 break;

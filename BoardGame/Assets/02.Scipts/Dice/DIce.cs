@@ -29,8 +29,10 @@ public class Dice : GameComponent
         uiManager = UiManager.Instance;
     }
 
-    protected override void OnRunning()
+    protected override void OnMain()
     {
+        base.OnMain();
+
         uiManager.DiceActive(true);
 
         //여기가 문제인거 같기도
@@ -38,8 +40,6 @@ public class Dice : GameComponent
             uiManager.AiPlayerRoutine();
 
         if (Red != null || White != null) return;
-
-        base.OnRunning();
 
         CreateDice();
         Reset();

@@ -25,7 +25,7 @@ public class PlayerMovement : GameComponent
         manager = GameManager.Instance;
     }
 
-    protected override void OnRunning()
+    protected override void OnMain()
     {
         if (player != null) return;
 
