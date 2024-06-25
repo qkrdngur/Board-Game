@@ -33,6 +33,7 @@ public class Dice : GameComponent
     {
         uiManager.DiceActive(true);
 
+        //여기가 문제인거 같기도
         if (manager.pTurn != PlayTurn.player)
             uiManager.AiPlayerRoutine();
 

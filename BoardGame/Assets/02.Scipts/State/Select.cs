@@ -20,7 +20,7 @@ public class Select : GameComponent
 
     protected override void OnSelect()
     {
-        StateMain();
+        if (StateMain()) return;
 
         SelectBuild();
         uiManager.UndoImg();
@@ -118,12 +118,16 @@ public class Select : GameComponent
         uiManager.ChooseActive(value, active);
     }
 
-    private void StateMain()
+    private bool StateMain()
     {
-        if (manager.curBlock[manager.pTurn] % 10 == 0)
+        bool isReturn = manager.curBlock[manager.pTurn] % 10 == 0;
+
+        if (isReturn)
         {
             manager.NextTurn(manager.pTurn);
             manager.UpdateState(GameState.Main);
         }
+
+        return isReturn;
     }
 }

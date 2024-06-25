@@ -23,7 +23,7 @@ public class Build : GameComponent
 
     protected override void OnBuild()
     {
-        if (Return()) return;
+        //if (Return()) return; //이게 필요한가?
 
         manager.Build();
         StateMain();

@@ -9,9 +9,8 @@ public class PlayerMovement : GameComponent
     public float jumpDuration = 0.1f;
 
     private Dictionary<PlayTurn, int> JumpNum = new Dictionary<PlayTurn, int>();
-
-    private GameObject player = null;
     private GameManager manager;
+    private GameObject player;
 
     private Vector3[] pos =
         {
@@ -37,11 +36,13 @@ public class PlayerMovement : GameComponent
         //나중에 ui로 게임 플레이 인원 정하여 인원만큼 for문 돌수있게
         for (int i = 0; i < 4; i++)
         {
-            player = ObjectPool.instance.GetObject(PoolObjectType.player);
+            GameObject p = ObjectPool.instance.GetObject(PoolObjectType.player);
+
+            player = p;
             player.transform.position += pos[i];
 
             JumpNum[(PlayTurn)i] = 0;
-            manager.player.Add((PlayTurn)i, player);
+            manager.player.Add((PlayTurn)i, p);
         }
     }
 
