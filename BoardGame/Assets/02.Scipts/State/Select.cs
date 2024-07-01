@@ -44,7 +44,6 @@ public class Select : GameComponent
 
         manager.isChangeColor = false;
         //PayMoney();
-
     }
 
     private void PayMoney()

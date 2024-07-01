@@ -50,6 +50,9 @@ public class UiManager : MonoSingleton<UiManager>
         }
         else
         {
+            for (int i = 0; i < towerImg.Length; i++)
+                towerImg[i].gameObject.SetActive(false);
+
             payBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 isBuyBuilding = true;
@@ -57,6 +60,10 @@ public class UiManager : MonoSingleton<UiManager>
                 UndoUI();
                 payBtn.SetActive(false);
             });
+
+            //색이 바뀌면 안되는데 바뀜, 그리고 밑에 건물 선택버튼 끄는거 조건 다시 생각해보기
+            manager.isChangeColor = false;
+            manager.Build();
 
             cancelBtn.SetActive(false);
             payBtn.SetActive(true);
@@ -126,7 +133,7 @@ public class UiManager : MonoSingleton<UiManager>
     #region UIDotWeen
     public void ShowUI()
     {
-        SelectBuild();
+        if (manager.isChangeColor) SelectBuild();
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
 
         saveTower = manager.buildCount[manager.curBlock[manager.pTurn]];
