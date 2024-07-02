@@ -107,7 +107,10 @@ public class GameManager : MonoSingleton<GameManager>
             if (i < built[curBlock[pTurn]])
             {
                 if (isChangeColor)
+                {
                     curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
+                    print("sssss");
+                }
 
                 continue;
             }
