@@ -63,6 +63,7 @@ public class UiManager : MonoSingleton<UiManager>
 
             //색이 바뀌면 안되는데 바뀜, 그리고 밑에 건물 선택버튼 끄는거 조건 다시 생각해보기
             manager.isChangeColor = false;
+            isBuyBuilding = false;
             manager.Build();
 
             cancelBtn.SetActive(false);

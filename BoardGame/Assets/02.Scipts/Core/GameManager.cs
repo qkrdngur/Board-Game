@@ -107,10 +107,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (i < built[curBlock[pTurn]])
             {
                 if (isChangeColor)
-                {
                     curTower[curBlock[pTurn]][i].GetComponent<MeshRenderer>().material = materials[(int)pTurn];
-                    print("sssss");
-                }
 
                 continue;
             }
@@ -163,12 +160,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (BuildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
 
-        if (built[curBlock[pTurn]] != 0)
+        if (turn != PlayTurn.player)
         {
             _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }
-
+        //여기가 이상합니다. 확인을 해야함 돈이 2배로 안나감
         if (UiManager.Instance.isBuyBuilding) // 나중에 ui로 돈들어가는 이펙트하고 이것저것 하기
         {
             price *= 2;
