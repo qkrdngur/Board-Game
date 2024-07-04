@@ -42,10 +42,10 @@ public class UiManager : MonoSingleton<UiManager>
 
     private void BuyBuilding(bool value)
     {
+        isBuyBuilding = false;
+
         if (value)
         {
-            isBuyBuilding = false;
-
             UndoUI();
         }
         else
@@ -53,22 +53,27 @@ public class UiManager : MonoSingleton<UiManager>
             for (int i = 0; i < towerImg.Length; i++)
                 towerImg[i].gameObject.SetActive(false);
 
+            cancelBtn.GetComponent<Button>().onClick.AddListener(UndoCancelBtn);
             payBtn.GetComponent<Button>().onClick.AddListener(() =>
             {
-                isBuyBuilding = true;
-
-                UndoUI();
                 payBtn.SetActive(false);
+                manager.DicMoney(manager.pTurn,
+                    manager.buildingPrice[manager.curBlock[manager.pTurn]] * (int)manager.tower);
             });
 
-            //색이 바뀌면 안되는데 바뀜, 그리고 밑에 건물 선택버튼 끄는거 조건 다시 생각해보기
             manager.isChangeColor = false;
-            isBuyBuilding = false;
             manager.Build();
 
-            cancelBtn.SetActive(false);
             payBtn.SetActive(true);
         }
+    }
+
+    private void UndoCancelBtn()
+    {
+        UndoUI();
+        payBtn.SetActive(false);
+
+        cancelBtn.GetComponent<Button>().onClick.RemoveListener(UndoCancelBtn);
     }
 
     public void PlayerUISetUp(List<Sprite> img, List<string> name, List<int> money)
@@ -111,8 +116,6 @@ public class UiManager : MonoSingleton<UiManager>
     public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
     public void ChooseActive(bool value, bool active)
     {
-        chooseBtn.SetActive(value); //여기 돈 없을 때 끄기
-
         string name = value ? btnName[0] : btnName[1];
         if (active) name = btnName[0];
 
@@ -142,6 +145,8 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void UndoUI()
     {
+        chooseBtn.SetActive(false);
+
         buildUi.transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.InOutQuint)
             .OnComplete(() => GameManager.Instance.UpdateState(GameState.Build));
     }
@@ -170,8 +175,9 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void CalcTowerNum(int value) // 건물 갯수
     {
-        towerNum = value;
+        chooseBtn.SetActive(true);
 
+        towerNum = value;
         manager.tower = (CurTower)towerNum;
     }
 
@@ -179,7 +185,9 @@ public class UiManager : MonoSingleton<UiManager>
     {
         manager.tower = saveTower;
 
-        BuyBuilding(chooseBtn.activeSelf);
+        bool isBuild = manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None
+            || manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.player;
+        BuyBuilding(isBuild);
     }
     #endregion
 }

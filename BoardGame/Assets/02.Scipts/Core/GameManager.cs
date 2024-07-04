@@ -72,10 +72,11 @@ public class GameManager : MonoSingleton<GameManager>
             component.UpdateState(state);
     }
 
-    public void NextTurn(PlayTurn turn)
+    public void NextTurn()
     {
-        UiManager.Instance.EnableOutLine(turn);
-        int next = (int)++turn % 4;
+        print("턴 넘기기");
+        UiManager.Instance.EnableOutLine(pTurn);
+        int next = (int)++pTurn % 4;
 
         pTurn = (PlayTurn)next;
     }
@@ -160,18 +161,19 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (BuildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
 
-        if (turn != PlayTurn.player)
+        if (turn != pTurn && built[curBlock[pTurn]] != 0)
         {
             _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }
-        //여기가 이상합니다. 확인을 해야함 돈이 2배로 안나감
+        //여기가 이상합니다. 확인을 해야함 돈이 2배로 안나감 이거만 해결하며ㅑㄴ 됨
+
         if (UiManager.Instance.isBuyBuilding) // 나중에 ui로 돈들어가는 이펙트하고 이것저것 하기
         {
             price *= 2;
             ChangeColor();
         }
-
+        print(price);
         money[pTurn] -= price;
     }
 

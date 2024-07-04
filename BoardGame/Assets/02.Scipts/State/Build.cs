@@ -31,7 +31,7 @@ public class Build : GameComponent
 
     private void StateMain()
     {
-        manager.NextTurn(manager.pTurn);
+        manager.NextTurn();
         manager.UpdateState(GameState.Main);
     }
 
