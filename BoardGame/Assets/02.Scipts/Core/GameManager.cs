@@ -74,7 +74,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void NextTurn()
     {
-        print("턴 넘기기");
         UiManager.Instance.EnableOutLine(pTurn);
         int next = (int)++pTurn % 4;
 

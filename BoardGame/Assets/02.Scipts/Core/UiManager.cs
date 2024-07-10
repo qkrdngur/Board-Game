@@ -116,6 +116,8 @@ public class UiManager : MonoSingleton<UiManager>
     public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
     public void ChooseActive(bool value, bool active)
     {
+        if (manager.isChangeColor || manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None) SelectBuild();
+
         string name = value ? btnName[0] : btnName[1];
         if (active) name = btnName[0];
 
@@ -137,7 +139,6 @@ public class UiManager : MonoSingleton<UiManager>
     #region UIDotWeen
     public void ShowUI()
     {
-        if (manager.isChangeColor) SelectBuild();
         buildUi.transform.DOScale(Vector2.one * 1f, 2f).SetEase(Ease.InOutQuint);
 
         saveTower = manager.buildCount[manager.curBlock[manager.pTurn]];
