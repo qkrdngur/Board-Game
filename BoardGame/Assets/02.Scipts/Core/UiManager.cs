@@ -121,7 +121,7 @@ public class UiManager : MonoSingleton<UiManager>
         string name = value ? btnName[0] : btnName[1];
         if (active) name = btnName[0];
 
-        cancelBtn.SetActive(true);
+        cancelBtn.SetActive(true);//여기 파산하게 될때 pay가 두개가 되는데 그걸 바꾸거나 건물을 자기꺼로 만드는걸 없애거나 하삼
         cancelBtn.GetComponentInChildren<TextMeshProUGUI>().text = name;
     }
 
