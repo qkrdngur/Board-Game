@@ -59,17 +59,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Update()
     {
-        if (State == GameState.Main)
-            foreach (var component in _components)
-                component.OnRoutine();
+        if (State == GameState.Main) 
+            _components.ForEach(component => component.OnRoutine());
     }
 
     public void UpdateState(GameState state)
     {
         State = state;
-
-        foreach (var component in _components)
-            component.UpdateState(state);
+        _components.ForEach(component => component.UpdateState(state));
     }
 
     public void NextTurn()

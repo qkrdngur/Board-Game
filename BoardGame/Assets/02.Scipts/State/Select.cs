@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using BoardGame.Util;
 using System;
+using UnityEngine;
 
 public class Select : GameComponent
 {
