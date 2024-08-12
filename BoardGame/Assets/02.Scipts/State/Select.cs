@@ -112,6 +112,7 @@ public class Select : GameComponent
 
     private void Bankruptcy()
     {
+        Debug.Log("파산");
         //Enum값 제거를 이용해서 만들어진 Enum변수에서 파산한 플레이어를 없엔다.
         ObjectPool.instance.ReturnObject(PoolObjectType.player, manager.player[manager.pTurn]);
     }
