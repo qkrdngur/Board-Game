@@ -75,11 +75,13 @@ public class Select : GameComponent
 
         if ((int)tower * buildMoney * 2 <= money)
         {
+            Debug.Log("건물 구매");
             manager.tower = tower;
             uiManager.isBuyBuilding = true;
         }
         else if ((int)tower * buildMoney <= money)
         {
+            Debug.Log("통행료");
             manager.tower = tower;
         }
         else
@@ -104,7 +106,8 @@ public class Select : GameComponent
             if (money >= buildMoney * num)
             {
                 manager.tower = (CurTower)num;
-
+                Debug.Log("건물 삼");
+                
                 break;
             }
         }
