@@ -62,7 +62,7 @@ public class UiManager : MonoSingleton<UiManager>
             });
 
             manager.isChangeColor = false;
-            manager.Build();
+            manager.BuildFunc();
 
             payBtn.SetActive(true);
         }

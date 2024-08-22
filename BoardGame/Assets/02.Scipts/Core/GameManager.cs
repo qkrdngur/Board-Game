@@ -36,6 +36,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void FirstPlayer()
     {
+
         //여기에 처음 시작 할 플레이어 정하는거 하기(이대로하면 안됨)
         int firstPlayer = UnityEngine.Random.Range(0, Enum.GetValues(typeof(PlayTurn)).Length);
         pTurn = (PlayTurn)firstPlayer;
@@ -78,7 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     #region Build
-    public void Build()
+    public void BuildFunc()
     {
         buildCount[curBlock[pTurn]] = tower;
 
@@ -169,7 +170,7 @@ public class GameManager : MonoSingleton<GameManager>
             price *= 2;
             ChangeColor();
         }
-        print(price);
+
         money[pTurn] -= price;
     }
 

@@ -25,7 +25,7 @@ public class Build : GameComponent
     {
         //if (Return()) return; //이게 필요한가?
 
-        manager.Build();
+        manager.BuildFunc();
         StateMain();
     }
 
