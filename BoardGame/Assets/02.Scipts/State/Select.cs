@@ -64,7 +64,7 @@ public class Select : GameComponent
 
         buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
         money = manager.money[manager.pTurn];
-
+        Debug.Log($"({tower.GetType()}, {tower}), {buildMoney}, {money}");
         ExistBuilding(tower);
         NonExistBuilding(tower);
     }
@@ -94,7 +94,7 @@ public class Select : GameComponent
     private void NonExistBuilding(CurTower tower)
     {
         if (tower != CurTower.none) return;
-
+        Debug.Log("sdfghgfdsdfghjhgfdscvcbcvhxhjxr");
         for (int num = Enum.GetValues(typeof(CurTower)).Length - 1; num > 0; num--)
         {
             if ((CurTower)num == CurTower.none)
@@ -107,7 +107,7 @@ public class Select : GameComponent
             {
                 manager.tower = (CurTower)num;
                 Debug.Log("건물 삼");
-                
+                Debug.Log($"건물 가격 : {buildMoney}");
                 break;
             }
         }

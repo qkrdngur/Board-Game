@@ -67,13 +67,22 @@ public class UiManager : MonoSingleton<UiManager>
             payBtn.SetActive(true);
         }
     }
-
     private void UndoCancelBtn()
     {
         UndoUI();
         payBtn.SetActive(false);
 
         cancelBtn.GetComponent<Button>().onClick.RemoveListener(UndoCancelBtn);
+    }
+    private void SelectBuild()
+    {
+        int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
+        int money = manager.money[manager.pTurn];
+
+        for (int i = 1; i <= towerImg.Length; i++)
+        {
+            towerImg[i - 1].gameObject.SetActive(money >= buildMoney * i);
+        }
     }
 
     public void PlayerUISetUp(List<Sprite> img, List<string> name, List<int> money)
@@ -125,16 +134,6 @@ public class UiManager : MonoSingleton<UiManager>
         cancelBtn.GetComponentInChildren<TextMeshProUGUI>().text = name;
     }
 
-    private void SelectBuild()
-    {
-        int buildMoney = manager.buildingPrice[manager.curBlock[manager.pTurn]];
-        int money = manager.money[manager.pTurn];
-
-        for (int i = 1; i <= towerImg.Length; i++)
-        {
-            towerImg[i - 1].gameObject.SetActive(money >= buildMoney * i);
-        }
-    }
 
     #region UIDotWeen
     public void ShowUI()
