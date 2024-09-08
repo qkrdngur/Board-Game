@@ -22,7 +22,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Dictionary<PlayTurn, GameObject> player       { get; set; } = new();
     public Dictionary<PlayTurn, int> curBlock            { get; set; } = new();
     public Dictionary<PlayTurn, int> money               { get; set; } = new();
-    public Dictionary<int, PlayMoney> BuildingOwner      { get; set; } = new();
+    public Dictionary<PlayTurn, bool> diePlayer          { get; set; } = new();
+    public Dictionary<int, PlayMoney> buildingOwner      { get; set; } = new();
     public Dictionary<int, CurTower> buildCount          { get; set; } = new();
     public Dictionary<int, int> buildingPrice            { get; set; } = new();
     public Dictionary<int, int> built                    { get; set; } = new();
@@ -74,8 +75,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         UiManager.Instance.EnableOutLine(pTurn);
         int next = (int)++pTurn % 4;
-
+        
         pTurn = (PlayTurn)next;
+
+        for(int i = 0; i < Enum.GetValues(typeof(PlayTurn)).Length; i++)
+        {
+            if (diePlayer[pTurn]) pTurn = (PlayTurn)(next + i);
+            else break;
+        }
     }
 
     #region Build
@@ -92,7 +99,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (_buyBuilding)
         {
-            BuildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
+            buildingOwner[curBlock[pTurn]] = (PlayMoney)pTurn;
 
             _buyBuilding = false; // 건물을 구매하지 않았을 때
         }
@@ -140,7 +147,7 @@ public class GameManager : MonoSingleton<GameManager>
 
             if (payPrice == 0 || (pTurn == curTurn)) continue;
 
-            if (BuildingOwner[curBlock[pTurn]] == PlayMoney.None)
+            if (buildingOwner[curBlock[pTurn]] == PlayMoney.None)
             {
                 _buyBuilding = true;
                 money[pTurn] -= payPrice;
@@ -156,7 +163,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void DicMoney(PlayTurn turn, int price)
     {
-        if (BuildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
+        if (buildingOwner[curBlock[pTurn]] != (PlayMoney)turn) return;
 
         if (turn != pTurn && built[curBlock[pTurn]] != 0)
         {

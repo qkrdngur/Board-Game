@@ -73,7 +73,6 @@ public class Select : GameComponent
     {
         if (tower == CurTower.none) return;
 
-        Debug.Log("ssssssssssss");
         if ((int)tower * buildMoney * 2 <= money)
         {
             manager.tower = tower;
@@ -97,15 +96,13 @@ public class Select : GameComponent
         {
             if ((CurTower)num == CurTower.none)
             {
-                Debug.Log("나 파산");
                 Bankruptcy();//파산했을 때
             }
 
             if (money >= buildMoney * num)
             {
                 manager.tower = (CurTower)num;
-                Debug.Log("건물 삼");
-                Debug.Log($"건물 가격 : {buildMoney}");
+
                 break;
             }
         }

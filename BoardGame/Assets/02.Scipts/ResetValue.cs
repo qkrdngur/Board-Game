@@ -24,7 +24,7 @@ public class ResetValue : GameComponent
         for (int i = 0; i < count; i++)
         {
             manager.buildingPrice[i] = manager.blockSO.BuildPrice[i];
-            manager.BuildingOwner[i] = PlayMoney.None;
+            manager.buildingOwner[i] = PlayMoney.None;
             manager.buildCount[i] = 0;
             manager.curTower[i] = new List<GameObject>();
         }
@@ -32,6 +32,7 @@ public class ResetValue : GameComponent
         foreach (PlayTurn play in Enum.GetValues(typeof(PlayTurn)))
         {
             manager.curBlock[play] = 0;
+            manager.diePlayer[play] = false;
             manager.playerSO.Money[(int)play] = initPrice;
             manager.money[play] = initPrice;
             manager.money[PlayTurn.player] = 1000;

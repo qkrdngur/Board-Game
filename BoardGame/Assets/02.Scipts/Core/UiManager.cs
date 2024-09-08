@@ -125,7 +125,7 @@ public class UiManager : MonoSingleton<UiManager>
     public void playerUIActive(bool value) => playerInfoUI.gameObject.SetActive(value);
     public void ChooseActive(bool value, bool active)
     {
-        if (manager.isChangeColor || manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None) SelectBuild();
+        if (manager.isChangeColor || manager.buildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None) SelectBuild();
 
         string name = value ? btnName[0] : btnName[1];
         if (active) name = btnName[0];
@@ -185,8 +185,8 @@ public class UiManager : MonoSingleton<UiManager>
     {
         manager.tower = saveTower;
 
-        bool isBuild = manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None
-            || manager.BuildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.player;
+        bool isBuild = manager.buildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.None
+            || manager.buildingOwner[manager.curBlock[manager.pTurn]] == PlayMoney.player;
         BuyBuilding(isBuild);
     }
     #endregion
