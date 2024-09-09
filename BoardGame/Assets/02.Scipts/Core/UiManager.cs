@@ -11,7 +11,6 @@ public class UiManager : MonoSingleton<UiManager>
     DiceGague dice;
     GameManager manager;
 
-    [SerializeField] private List<RectTransform> playerUI;
     [SerializeField] private GameObject[] towerImg;
     [SerializeField] private GameObject playerInfoUI;
     [SerializeField] private GameObject chooseBtn;
@@ -23,10 +22,11 @@ public class UiManager : MonoSingleton<UiManager>
 
     [Space(20)]
     public Transform dicePoint;
+    public List<RectTransform> playerUI;
 
-    public bool isBuyBuilding { get; set; } = false;
-    public bool isSpin { get; set; } = false;
-    public float grade { get; private set; }
+    public bool isBuyBuilding               { get; set; } = false;
+    public bool isSpin                      { get; set; } = false;
+    public float grade                      { get; private set; }
 
     private CurTower saveTower = CurTower.none;
     private GameState gameState = GameState.Build;
@@ -61,7 +61,6 @@ public class UiManager : MonoSingleton<UiManager>
                     manager.buildingPrice[manager.curBlock[manager.pTurn]] * (int)manager.tower);
             });
 
-            manager.isChangeColor = false;
             manager.BuildFunc();
 
             payBtn.SetActive(true);

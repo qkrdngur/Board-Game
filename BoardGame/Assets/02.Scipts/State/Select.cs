@@ -1,6 +1,8 @@
 using BoardGame.Util;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class Select : GameComponent
 {
@@ -12,7 +14,7 @@ public class Select : GameComponent
 
     public Select(GameManager game) : base(game)
     {
-        manager = GameManager.Instance;
+        manager = game;
         uiManager = UiManager.Instance;
     }
 
@@ -94,10 +96,11 @@ public class Select : GameComponent
 
         for (int num = Enum.GetValues(typeof(CurTower)).Length - 1; num >= 0; num--)
         {
-            if ((CurTower)num == CurTower.none)
-            {
-                Bankruptcy();//파산했을 때
-            }
+            //여기는 다시 생각 파산은 필요없고 다른 처리 필요
+            //if ((CurTower)num == CurTower.none)
+            //{
+            //    Bankruptcy();//파산했을 때
+            //}
 
             if (money >= buildMoney * num)
             {
@@ -113,6 +116,9 @@ public class Select : GameComponent
         Debug.Log("파산");
         //manager에서 함수로 파산한 플레이어는 제외해주게 해야함
         //Enum값 제거를 이용해서 만들어진 Enum변수에서 파산한 플레이어를 없엔다.
+        manager.diePlayer[manager.pTurn] = true;
+        uiManager.playerUI[(int)manager.pTurn].GetComponent<Image>().DOFade(.1f, 1);
+        //uiManager.playerUI[(int)manager.pTurn].GetComponent<Image>().;
         ObjectPool.instance.ReturnObject(PoolObjectType.player, manager.player[manager.pTurn]);
     }
 

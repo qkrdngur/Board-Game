@@ -77,10 +77,11 @@ public class GameManager : MonoSingleton<GameManager>
         int next = (int)++pTurn % 4;
         
         pTurn = (PlayTurn)next;
-
+        print(Enum.GetValues(typeof(PlayTurn)).Length);
         for(int i = 0; i < Enum.GetValues(typeof(PlayTurn)).Length; i++)
         {
-            if (diePlayer[pTurn]) pTurn = (PlayTurn)(next + i);
+            print(pTurn);
+            if (diePlayer[pTurn]) pTurn = (PlayTurn)((next + i) % 4);
             else break;
         }
     }
@@ -103,6 +104,8 @@ public class GameManager : MonoSingleton<GameManager>
 
             _buyBuilding = false; // 건물을 구매하지 않았을 때
         }
+
+        isChangeColor = false;
     }
 
     private void BuildTower()

@@ -692,11 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846b5061158d29341a076dd2f478c131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI:
-  - {fileID: 306929001}
-  - {fileID: 2035238748}
-  - {fileID: 1403185523}
-  - {fileID: 1849063511}
   towerImg:
   - {fileID: 1561866222}
   - {fileID: 1258573963}
@@ -709,6 +704,11 @@ MonoBehaviour:
   buildUi: {fileID: 1806884033}
   btnNameText: {fileID: 1881863053}
   dicePoint: {fileID: 2009290515}
+  playerUI:
+  - {fileID: 306929001}
+  - {fileID: 2035238748}
+  - {fileID: 1403185523}
+  - {fileID: 1849063511}
 --- !u!4 &93665415
 Transform:
   m_ObjectHideFlags: 0
