@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: player
   m_EditorClassIdentifier: 
   Img:
-  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
-  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
-  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
-  - {fileID: 21300000, guid: edac598968b182942ac0201ce92420f0, type: 3}
+  - {fileID: 21300000, guid: 4612ecc606f85c44d8cba1004e82f8d3, type: 3}
+  - {fileID: 21300000, guid: 98cd6f83e0b56d04780ec0cfdc10f5fb, type: 3}
+  - {fileID: 21300000, guid: 1adfd344142bd494a937a8e81c4fc814, type: 3}
+  - {fileID: 21300000, guid: 8be2f50f2ce00874e8082aacf9193e58, type: 3}
   Name:
   - player1
   - player2
   - player3
   - player4
-  Money: b80b0000a2feffff1affffff0a000000
+  Money: e80300000a0000001400000000000000

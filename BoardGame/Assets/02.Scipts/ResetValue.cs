@@ -8,7 +8,7 @@ public class ResetValue : GameComponent
 {
     GameManager manager;
 
-    private int initPrice = 100;
+    private int initPrice = 1000;
 
     public ResetValue(GameManager game) : base(game)
     {
@@ -35,7 +35,7 @@ public class ResetValue : GameComponent
             manager.diePlayer[play] = false;
             manager.playerSO.Money[(int)play] = initPrice;
             manager.money[play] = initPrice;
-            manager.money[PlayTurn.player] = 1000;
+            //manager.money[PlayTurn.player] = 1000;
         }
 
         UiManager.Instance.PlayerUISetUp(manager.playerSO.Img, manager.playerSO.Name, manager.playerSO.Money);

@@ -77,10 +77,9 @@ public class GameManager : MonoSingleton<GameManager>
         int next = (int)++pTurn % 4;
         
         pTurn = (PlayTurn)next;
-        print(Enum.GetValues(typeof(PlayTurn)).Length);
+
         for(int i = 0; i < Enum.GetValues(typeof(PlayTurn)).Length; i++)
         {
-            print(pTurn);
             if (diePlayer[pTurn]) pTurn = (PlayTurn)((next + i) % 4);
             else break;
         }
@@ -170,6 +169,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (turn != pTurn && built[curBlock[pTurn]] != 0)
         {
+            print(buildingOwner[curBlock[pTurn]]);
             _buyBuilding = true; // 건물을 구매하였을 때만 owner가 되게
             money[turn] += price;
         }

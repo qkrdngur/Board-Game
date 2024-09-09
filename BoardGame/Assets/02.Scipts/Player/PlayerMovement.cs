@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : GameComponent
 {
     public float jumpPower = 1.5f;
-    public float jumpDuration = 0.1f;
+    public float jumpDuration = 0.2f;
 
     private Dictionary<PlayTurn, int> JumpNum = new Dictionary<PlayTurn, int>();
     private GameManager manager;
